@@ -1,0 +1,23 @@
+@use 'abstract' as *;
+
+html {
+	font-size: $font-size;
+	overflow-x: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-smooth: never;
+
+	body {
+		@include basic-font;
+
+		.header-navigation>div, 
+		.benefitBanner,
+		.content-wrapper.container {
+			width: 90vw;
+		}
+
+		h1, h2, h3, h4, h5, h6, .homepage-group-title  {
+			@include expressive-font;
+		}
+	}	
+}

@@ -1,0 +1,39 @@
+@use 'abstract' as *;
+
+header {
+    &#header{
+        padding-top: 105px;
+        background-color: white;
+
+        .header-title {
+            display: none;
+        }
+
+        .navigation-buttons {
+            a {
+                color: black;
+            }
+        }
+
+        .header-navigation {
+            > div {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 5%;
+
+                .site-name {
+                    order: 1;
+                }
+                .navigation-buttons {
+                    order: 3;
+                    display: flex;
+                }
+
+                nav {
+                    order: 2;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "name": "jazzyki-wordpress-fe-manipulation",
+    "version": "2.0.0",
+    "description": "Compile and upload my local app onto wordpress theme",
+    "main": "gulpfile.js",
+    "dependencies": {
+        "autoprefixer": "^10.4.21",
+        "browser-sync": "^2.27.4",
+        "cssnano": "^5.1.15",
+        "dotenv": "^17.2.3",
+        "fancy-log": "^2.0.0",
+        "gulp": "^4.0.2",
+        "gulp-cli": "^2.3.0",
+        "gulp-concat": "^2.6.1",
+        "gulp-postcss": "^9.0.1",
+        "gulp-replace": "^1.1.3",
+        "gulp-sass": "^5.1.0",
+        "gulp-sourcemaps": "^3.0.0",
+        "gulp-terser": "^2.1.0",
+        "postcss": "^8.3.5",
+        "sass": "^1.93.2"
+    },
+    "devDependencies": {
+        "gulp-sftp-up4": "^0.1.8"
+    }
+}

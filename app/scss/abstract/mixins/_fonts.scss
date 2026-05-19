@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&display=swap');
+
+
+$expressive-font: 'Roboto Slab', serif;
+$basic-font: 'Josefin Sans', sans-serif;
+@mixin expressive-font {
+    font-family: $expressive-font;
+    font-weight: 700;
+}
+@mixin basic-font {
+    font-family: $basic-font;
+}

@@ -1,0 +1,13 @@
+@use 'abstract' as *;
+
+.content-wrapper {
+    background-color: transparent;
+    
+    @include respond-to(lg) {
+        padding-top: 0;
+    }
+
+    main {
+        padding: 0;
+    }
+}

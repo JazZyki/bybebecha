@@ -1,0 +1,22 @@
+// 1. Definice mapy s breakpointy
+$breakpoints: (
+  "sm": 576px,
+  "md": 768px,
+  "lg": 992px,
+  "xl": 1200px,
+  "xxl": 1400px,
+  "max": 1600px
+);
+
+// 2. Efektivní mixin
+@mixin respond-to($breakpoint) {
+  // Ověříme, zda klíč v mapě existuje
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    // Upozornění pro vývojáře, pokud zadá špatný název
+    @warn "Bohužel, hodnota '#{$breakpoint}' nebyla v mapě $breakpoints nalezena.";
+  }
+}
