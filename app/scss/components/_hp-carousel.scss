@@ -1,0 +1,36 @@
+.homepage-box.before-carousel {
+    .container,
+    .banners-row,
+    .wide-carousel,
+    .carousel,
+    .carousel-inner {
+        width: 100%;
+        max-height: calc(100vh - 125px);
+        overflow: hidden;
+        
+        .carousel-inner {
+            //display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5%;
+        }
+    }
+
+    .carousel {
+        .item {
+            /*display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-content: space-around;
+            flex-direction: row;
+            align-items: center;*/
+
+            .carousel-slide-image-wrapper {
+                
+            }
+
+            .extended-banner-texts {
+                //position: relative;
+            }
+        }
+    }
+}

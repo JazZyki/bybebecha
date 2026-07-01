@@ -20,4 +20,8 @@ html {
 			@include expressive-font;
 		}
 	}	
+
+	.admin-bar {
+		display: none;
+	}
 }

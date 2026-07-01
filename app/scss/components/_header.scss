@@ -2,8 +2,33 @@
 
 header {
     &#header{
-        padding-top: 105px;
+        position: sticky;
+        top: 0;
         background-color: white;
+        z-index: 1000;
+
+        .container {
+            max-width: 90vw;
+            width: 100%;
+            padding: 0;
+        }
+
+        .header-top {
+            justify-content: space-between;
+
+            .site-name-wrapper,
+            .search,
+            .navigation-buttons {
+                flex: unset;
+            }
+
+            .site-name-wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 70%;
+            }
+        }
 
         .header-title {
             display: none;
@@ -29,10 +54,21 @@ header {
                     order: 3;
                     display: flex;
                 }
+            }
+        }
 
-                nav {
-                    order: 2;
-                }
+        nav#navigation {
+            .navigation-in {
+                background-color: transparent;
+            }
+
+
+            .site-name {
+                order: 1;
+            }
+            .navigation-buttons {
+                order: 3;
+                display: flex;
             }
         }
     }
