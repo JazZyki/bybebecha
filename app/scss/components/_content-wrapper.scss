@@ -7,6 +7,18 @@
         padding-top: 0;
     }
 
+    &.homepage-box {
+        border: none;
+    }
+
+    &.middle-banners-wrapper {
+        + .container {
+            width: 100vw;
+            padding: 0 5vw;
+            background-color: white;
+        }
+    }
+
     main {
         padding: 0;
     }

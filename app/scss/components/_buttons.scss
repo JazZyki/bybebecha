@@ -1,0 +1,121 @@
+@use "abstract" as *;
+
+a,
+button {
+  &.btn {
+    @include basic-font;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: .5rem 2rem .2rem;
+    position: relative;
+    font-size: 1.2rem;
+    line-height: 1;
+    font-weight: 300;
+    text-transform: none;
+    letter-spacing: 0.5px;
+    border-radius: 2rem;
+  }
+
+  &.btn-carousel-hp {
+    padding: 1.5rem 2rem 1.2rem;
+    background-color: $col-primary;
+    color: #ffffff !important;
+    border: 1px solid $col-primary;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+    &:hover {
+      background-color: transparent;
+      color: $col-primary !important;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(79, 90, 57, 0.25);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+
+  &.btn-secondary {
+    background-color: $col-secondary !important;
+    color: #ffffff !important;
+    border: none !important;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+    &:hover {
+      background-color: $col-secondary-darker !important;
+      color: white !important;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(195, 99, 92, 0.25);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+
+  &.btn-primary,
+  &.btn-cart {
+    background-color: $col-primary !important;
+    color: #ffffff !important;
+    border: none !important;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+    &:hover {
+      background-color: $col-primary-dark !important;
+      color: white !important;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(79, 90, 57, 0.25);
+    }
+
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+
+  &.btn-cart {
+    &::before {
+      content: none !important;
+    }
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      margin-left: 0.5rem;
+      margin-bottom: 3px;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve"><path style="fill:%23ffffff" d="M361.891 242.03 187.347 9.31c-7.714-10.283-22.298-12.365-32.582-4.655-10.283 7.713-12.367 22.3-4.655 32.582l164.072 218.758-164.071 218.767c-7.713 10.282-5.627 24.871 4.655 32.582A23.17 23.17 0 0 0 168.711 512c7.076 0 14.064-3.215 18.637-9.311l174.544-232.732a23.274 23.274 0 0 0-.001-27.927"/></svg>');
+      background-size: contain;
+      background-repeat: no-repeat;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    &:hover {
+      &::after {
+        transform: translateX(5px);
+      }
+    }
+  }
+
+  &.has-arrow {
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      margin-left: 0.5rem;
+      margin-bottom: 3px;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve"><path style="fill:%23ffffff" d="M361.891 242.03 187.347 9.31c-7.714-10.283-22.298-12.365-32.582-4.655-10.283 7.713-12.367 22.3-4.655 32.582l164.072 218.758-164.071 218.767c-7.713 10.282-5.627 24.871 4.655 32.582A23.17 23.17 0 0 0 168.711 512c7.076 0 14.064-3.215 18.637-9.311l174.544-232.732a23.274 23.274 0 0 0-.001-27.927"/></svg>');
+      background-size: contain;
+      background-repeat: no-repeat;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    &:hover {
+      &::after {
+        transform: translateX(5px);
+      }
+    }
+  }
+}

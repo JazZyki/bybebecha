@@ -1,36 +1,362 @@
+@use "abstract" as *;
+
+// Main homepage carousel container styling
 .homepage-box.before-carousel {
-    .container,
-    .banners-row,
-    .wide-carousel,
-    .carousel,
-    .carousel-inner {
-        width: 100%;
-        max-height: calc(100vh - 125px);
-        overflow: hidden;
-        
-        .carousel-inner {
-            //display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 5%;
-        }
+  padding: 0;
+  margin-bottom: 40px;
+  background-color: white;
+  overflow: hidden;
+
+  .container {
+    //max-width: 90vw;
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .banners-row {
+    margin: 0;
+  }
+
+  .wide-carousel {
+    width: 100%;
+    position: relative;
+  }
+}
+
+// Splide Overwrite and custom styling
+.hp-splide-carousel {
+  width: 100%;
+  position: relative;
+
+  // Core track layout
+  .splide__track {
+    overflow: hidden;
+  }
+
+  .splide__list {
+    display: flex;
+    padding: 0 5vw !important; // Add horizontal padding to the carousel
+  }
+
+  .hp-splide-arrows {
+    display: none; // hide on mobile to save space, pagination is enough
+
+    @include respond-to(md) {
+      display: block;
+    }
+  }
+
+  .hp-splide-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background-color: rgba(#ffffff, 0.9);
+    border: 1px solid rgba($col-primary, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+    svg {
+      width: 18px;
+      height: 18px;
+      fill: $col-primary-dark;
+      transition:
+        fill 0.3s ease,
+        transform 0.3s ease;
     }
 
-    .carousel {
-        .item {
-            /*display: grid;
-            grid-template-columns: 1fr 1fr;
-            justify-content: space-around;
-            flex-direction: row;
-            align-items: center;*/
+    &:hover {
+      background-color: $col-primary;
+      border-color: $col-primary;
+      box-shadow: 0 6px 18px rgba($col-primary, 0.25);
 
-            .carousel-slide-image-wrapper {
-                
-            }
-
-            .extended-banner-texts {
-                //position: relative;
-            }
-        }
+      svg {
+        fill: #ffffff;
+      }
     }
+
+    &:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    &--prev {
+      left: 20px;
+
+      @include respond-to(xl) {
+        left: 20px;
+      }
+
+      &:hover svg {
+        transform: translateX(-2px);
+      }
+    }
+
+    &--next {
+      right: 20px;
+
+      @include respond-to(xl) {
+        right: 20px;
+      }
+
+      &:hover svg {
+        transform: translateX(2px);
+      }
+    }
+  }
+
+  // Custom Pagination Dots
+  .hp-splide-pagination {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    z-index: 10;
+
+    &-page {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: $col-primary-dark;
+      opacity: 0.2;
+      margin: 0 6px;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+      &:hover {
+        opacity: 0.4;
+      }
+
+      &.is-active {
+        width: 24px;
+        border-radius: 4px;
+        background-color: $col-secondary;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+// Individual Slide Styling
+.hp-carousel-slide {
+  width: 100%;
+  max-width: 90vw;
+  margin: 0 auto;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  min-height: 520px;
+  padding: 40px 0;
+
+  @include respond-to(lg) {
+    min-height: 600px;
+    padding: 60px 0;
+  }
+
+  .hp-carousel-slide-container {
+    display: flex;
+    flex-direction: column-reverse; // image first on mobile
+    gap: 30px;
+    width: 100%;
+    align-items: center;
+
+    @include respond-to(lg) {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr; // Content slightly wider
+      gap: 60px;
+      text-align: left;
+      flex-direction: row;
+    }
+  }
+
+  // Text Content Wrapper
+  .hp-carousel-content-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    @include respond-to(lg) {
+      text-align: left;
+    }
+  }
+
+  .hp-carousel-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 580px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+
+    @include respond-to(lg) {
+      margin: 0;
+    }
+  }
+
+  .hp-carousel-pretitle {
+    @include basic-font;
+    font-size: 0.9rem;
+    line-height: 1;
+    color: $col-background; // Dark Green
+    background-color: $col-primary-dark; // Light Green
+    margin: 0 0 10px 0;
+    padding: 0.5rem 1rem 0.3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 1rem;
+
+    @include respond-to(md) {
+      font-size: 1rem;
+    }
+  }
+
+  // Typography
+  .hp-carousel-title {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    text-align: left;
+    @include expressive-font;
+    font-size: 2rem;
+    line-height: 1.25;
+    color: $col-primary-dark; // Dark Green
+    margin: 0 0 20px 0;
+    padding: 0;
+    letter-spacing: -0.5px;
+    top: unset;
+    background: transparent;
+    box-shadow: none;
+
+    strong {
+      display: block;
+      color: $col-secondary; // Coral/Pink accent color
+      font-weight: 700;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 130px;
+      height: 10px;
+      background-image: url('data:image/svg+xml,<svg viewBox="0 0 500 40" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><path d="M252.281 39.631q-1.215.077-2.444.077c-10.148 0-19.688-3.952-26.864-11.128a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0-5.352-5.351-14.059-5.351-19.41 0-14.814 14.813-38.917 14.813-53.729 0-4.739-4.738-4.739-12.421-.001-17.16s12.421-4.739 17.16 0c5.352 5.351 14.06 5.351 19.411 0 14.813-14.814 38.916-14.814 53.73 0 5.35 5.351 14.058 5.352 19.409 0C120.441 4.245 129.983.292 140.13.292c10.148.001 19.689 3.953 26.865 11.129 5.35 5.35 14.058 5.351 19.409-.001C193.58 4.245 203.122.292 213.269.292c9.305.001 18.1 3.323 25.029 9.408a12 12 0 0 1 2.161 1.72 13.7 13.7 0 0 0 9.831 4.013 13.62 13.62 0 0 0 9.253-4.013c.67-.67 1.398-1.245 2.169-1.725C276.618-3.369 299.385-2.794 313.6 11.42c5.35 5.351 14.058 5.352 19.409 0C340.185 4.245 349.727.292 359.874.292c10.148.001 19.689 3.953 26.865 11.129 5.35 5.35 14.058 5.351 19.409-.001C413.324 4.245 422.866.292 433.013.292c10.148.001 19.689 3.953 26.865 11.129a13.64 13.64 0 0 0 9.705 4.019c3.666 0 7.113-1.428 9.705-4.02 4.738-4.739 12.421-4.739 17.16 0s4.739 12.421.001 17.16c-7.176 7.176-16.716 11.128-26.865 11.128s-19.688-3.952-26.864-11.128a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0-5.352-5.351-14.059-5.351-19.41 0-6.869 6.869-15.735 10.552-24.746 11.051Z" style="fill:%23203A25"/></svg>');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+
+    @include respond-to(md) {
+      font-size: 2.75rem;
+    }
+
+    @include respond-to(lg) {
+      font-size: 3.25rem;
+    }
+  }
+
+  .hp-carousel-text {
+    @include basic-font;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: $col-text;
+    margin: 0 0 35px 0;
+    display: block;
+    position: relative;
+    background-color: transparent;
+    box-shadow: none;
+
+    @include respond-to(md) {
+      font-size: 1.1rem;
+    }
+  }
+
+  // Image Styling
+  .hp-carousel-image-wrapper {
+    width: 100%;
+    max-width: 500px;
+    max-height: 65vh;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 11px 8px 7px 2px rgba(32, 58, 37, .1);
+    aspect-ratio: 4 / 3;
+    transform: rotate(3deg);
+
+    @include respond-to(lg) {
+      max-width: 100%;
+      aspect-ratio: 1 / 1; // square image layout for desktop
+    }
+
+    .hp-carousel-image-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hp-carousel-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+  }
+
+  // Subtle slide hover zoom effect
+  &:hover {
+    .hp-carousel-image {
+      transform: scale(1.05);
+    }
+  }
+
+  // --- Premium Entrance Animations ---
+  // Make text fade & slide up when slide becomes active
+  .hp-carousel-title,
+  .hp-carousel-text,
+  .hp-carousel-action {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1),
+      transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  &.is-active {
+    .hp-carousel-title {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.15s;
+    }
+    .hp-carousel-text {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.3s;
+    }
+    .hp-carousel-action {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.45s;
+    }
+  }
 }

@@ -1,0 +1,51 @@
+@use 'abstract' as *;
+
+.top-navigation-bar {
+    background-color: $col-primary;
+    border: none !important;
+
+    .container {
+        width: 90vw;
+        padding: 0;
+        margin: 0 auto;
+    }
+
+    .top-navigation-contacts,
+    .top-navigation-menu {
+        background-color: transparent;
+        border: none !important;
+    }
+
+    .top-navigation-contacts {
+        color: $col-background;
+
+        a {
+            color: $col-background;
+            text-decoration: none;
+            padding: 0;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                color: $col-secondary-light;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .top-navigation-menu {
+        padding: 0;
+        color: $col-background;
+
+        a {
+            color: $col-background;
+            text-decoration: none;
+            //padding: 0;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                color: $col-secondary-light;
+                text-decoration: underline;
+            }
+        }
+    }
+}
