@@ -1,0 +1,244 @@
+@use "abstract" as *;
+
+.type-detail {
+    .content-wrapper {
+        .product-top {
+            .col-xs-12:first-of-type {
+                display: none;
+            }
+        }
+
+        .p-detail-inner-header {
+            display: none;
+        }
+    }
+
+    .basic-description,
+    .p-short-description {
+
+        ul li,
+        p {
+            font-size: 1.1rem;
+
+            b,
+            strong {
+                font-weight: 900;
+                color: $col-primary;
+            }
+        }
+    }
+
+    .basic-description {
+        .our-tip {
+            display: inline-block;
+            width: 40%;
+            margin: 1rem 0 1rem 3rem;
+            padding: 1.5rem 1.5rem 1.5rem 11rem;
+            position: relative;
+            border: 1px solid #C3635C;
+            border-radius: 1rem;
+            float: right;
+            font-size: 1.3rem;
+
+            &::before {
+                content: '';
+                display: block;
+                width: 10rem;
+                height: 16rem;
+                position: absolute;
+                left: 0;
+                top: -1rem;
+                background-image: url('/user/documents/upload/product-info/bebesak-pozor-web.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            p {
+                margin-bottom: 0;
+
+                &:first-of-type {
+                    height: 65px;
+                    background-color: $col-secondary;
+                    padding: .5rem 1rem;
+                    margin: -1.5rem -1.5rem 1rem;
+                    border-radius: 0 0.85rem 0 0;
+                    font-weight: 600;
+                    color: $col-background !important;
+
+                    &::before {
+                        content: '';
+                        display: block;
+                        width: 10rem;
+                        height: 65px;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        background-color: $col-secondary;
+                        border-radius: 0.85rem 0 0 0;
+                        z-index: -1;
+                    }
+                }
+            }
+        }
+    }
+
+    .extended-description {
+        flex: 0 0 calc(38% - 10px);
+    }
+
+    .p-image-wrapper {
+        display: grid;
+        grid-template-columns: auto 100px;
+        width: 60%;
+
+        .p-image {
+            margin-bottom: 0;
+        }
+
+        .p-thumbnails {
+            height: 100%;
+
+            >div {
+                max-width: 100px;
+                height: 100%;
+
+                >div {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                    max-width: 100px;
+                    height: 100%;
+                }
+            }
+        }
+    }
+
+    .p-info-wrapper {
+        width: 40%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        >h1 {
+            width: 100%;
+            position: relative;
+            margin: 2rem 0;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: $col-primary;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -12px;
+                left: 0;
+                width: 130px;
+                height: 6px;
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+        }
+
+        .p-final-price-wrapper,
+        .availability-value {
+            width: 100%;
+        }
+
+        .p-final-price-wrapper {
+            margin: 1rem 0;
+
+            .price-final {
+                @include expressive-font;
+                font-size: 2rem;
+                color: $col-secondary;
+            }
+        }
+
+        .add-to-cart {
+            background-color: $col-primary;
+            border: none;
+            border-radius: 2rem;
+
+            .quantity {
+                border: none;
+                height: 100%;
+
+                label {
+                    color: $col-background;
+                    font-size: 1.25rem;
+                    height: 100%;
+
+                    input {
+                        height: 100%;
+                    }
+                }
+
+                button {
+                    height: 26px;
+                    background-color: $col-primary-dark;
+                    color: $col-background;
+                    border: none;
+                    transition: all 0.3s ease-in;
+
+                    &:hover {
+                        color: $col-primary-dark;
+                        background-color: $col-primary-light;
+                    }
+                }
+            }
+
+            .add-to-cart-button {
+                background-color: $col-primary;
+                color: $col-background;
+                font-size: 1.25rem;
+                height: 100%;
+                transition: all 0.3s ease-in;
+                border-radius: 0 2rem 2rem 0;
+
+                &:hover {
+                    padding-left: 2rem;
+                    background-color: $col-primary-dark;
+                }
+            }
+        }
+    }
+
+    &.aroma {
+        .p-info-wrapper {
+            >h1 {
+                color: $col-aroma !important;
+
+                &::after {
+                    background-image: url('data:image/svg+xml,<svg viewBox="0 0 500 40" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><path d="M252.281 39.631q-1.215.077-2.444.077c-10.148 0-19.688-3.952-26.864-11.128a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0-5.352-5.351-14.059-5.351-19.41 0-14.814 14.813-38.917 14.813-53.729 0-4.739-4.738-4.739-12.421-.001-17.16s12.421-4.739 17.16 0c5.352 5.351 14.06 5.351 19.411 0 14.813-14.814 38.916-14.814 53.73 0 5.35 5.351 14.058 5.352 19.409 0C120.441 4.245 129.983.292 140.13.292c10.148.001 19.689 3.953 26.865 11.129 5.35 5.35 14.058 5.351 19.409-.001C193.58 4.245 203.122.292 213.269.292c9.305.001 18.1 3.323 25.029 9.408a12 12 0 0 1 2.161 1.72 13.7 13.7 0 0 0 9.831 4.013 13.62 13.62 0 0 0 9.253-4.013c.67-.67 1.398-1.245 2.169-1.725C276.618-3.369 299.385-2.794 313.6 11.42c5.35 5.351 14.058 5.352 19.409 0C340.185 4.245 349.727.292 359.874.292c10.148.001 19.689 3.953 26.865 11.129 5.35 5.35 14.058 5.351 19.409-.001C413.324 4.245 422.866.292 433.013.292c10.148.001 19.689 3.953 26.865 11.129a13.64 13.64 0 0 0 9.705 4.019c3.666 0 7.113-1.428 9.705-4.02 4.738-4.739 12.421-4.739 17.16 0s4.739 12.421.001 17.16c-7.176 7.176-16.716 11.128-26.865 11.128s-19.688-3.952-26.864-11.128a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0-5.352-5.351-14.059-5.351-19.41 0-6.869 6.869-15.735 10.552-24.746 11.051Z" style="fill:%23808000"/></svg>');
+                }
+            }
+        }
+    }
+
+    &.deti {
+        .p-info-wrapper {
+            >h1 {
+                color: $col-deti !important;
+
+                &::after {
+                    background-image: url('data:image/svg+xml,<svg viewBox="0 0 500 40" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><path d="M252.281 39.631q-1.215.077-2.444.077c-10.148 0-19.688-3.952-26.864-11.128a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0-5.352-5.351-14.059-5.351-19.41 0-14.814 14.813-38.917 14.813-53.729 0-4.739-4.738-4.739-12.421-.001-17.16s12.421-4.739 17.16 0c5.352 5.351 14.06 5.351 19.411 0 14.813-14.814 38.916-14.814 53.73 0 5.35 5.351 14.058 5.352 19.409 0C120.441 4.245 129.983.292 140.13.292c10.148.001 19.689 3.953 26.865 11.129 5.35 5.35 14.058 5.351 19.409-.001C193.58 4.245 203.122.292 213.269.292c9.305.001 18.1 3.323 25.029 9.408a12 12 0 0 1 2.161 1.72 13.7 13.7 0 0 0 9.831 4.013 13.62 13.62 0 0 0 9.253-4.013c.67-.67 1.398-1.245 2.169-1.725C276.618-3.369 299.385-2.794 313.6 11.42c5.35 5.351 14.058 5.352 19.409 0C340.185 4.245 349.727.292 359.874.292c10.148.001 19.689 3.953 26.865 11.129 5.35 5.35 14.058 5.351 19.409-.001C413.324 4.245 422.866.292 433.013.292c10.148.001 19.689 3.953 26.865 11.129a13.64 13.64 0 0 0 9.705 4.019c3.666 0 7.113-1.428 9.705-4.02 4.738-4.739 12.421-4.739 17.16 0s4.739 12.421.001 17.16c-7.176 7.176-16.716 11.128-26.865 11.128s-19.688-3.952-26.864-11.128a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0-5.352-5.351-14.059-5.351-19.41 0-6.869 6.869-15.735 10.552-24.746 11.051Z" style="fill:%23ff506d"/></svg>');
+                }
+            }
+        }
+    }
+
+    &.darek {
+        //border-left: 0.5rem solid green !important;
+
+        .p-info-wrapper {
+            >h1 {
+                color: $col-darek !important;
+
+                &::after {
+                    background-image: url('data:image/svg+xml,<svg viewBox="0 0 500 40" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><path d="M252.281 39.631q-1.215.077-2.444.077c-10.148 0-19.688-3.952-26.864-11.128a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0-5.352-5.351-14.059-5.351-19.41 0-14.814 14.813-38.917 14.813-53.729 0-4.739-4.738-4.739-12.421-.001-17.16s12.421-4.739 17.16 0c5.352 5.351 14.06 5.351 19.411 0 14.813-14.814 38.916-14.814 53.73 0 5.35 5.351 14.058 5.352 19.409 0C120.441 4.245 129.983.292 140.13.292c10.148.001 19.689 3.953 26.865 11.129 5.35 5.35 14.058 5.351 19.409-.001C193.58 4.245 203.122.292 213.269.292c9.305.001 18.1 3.323 25.029 9.408a12 12 0 0 1 2.161 1.72 13.7 13.7 0 0 0 9.831 4.013 13.62 13.62 0 0 0 9.253-4.013c.67-.67 1.398-1.245 2.169-1.725C276.618-3.369 299.385-2.794 313.6 11.42c5.35 5.351 14.058 5.352 19.409 0C340.185 4.245 349.727.292 359.874.292c10.148.001 19.689 3.953 26.865 11.129 5.35 5.35 14.058 5.351 19.409-.001C413.324 4.245 422.866.292 433.013.292c10.148.001 19.689 3.953 26.865 11.129a13.64 13.64 0 0 0 9.705 4.019c3.666 0 7.113-1.428 9.705-4.02 4.738-4.739 12.421-4.739 17.16 0s4.739 12.421.001 17.16c-7.176 7.176-16.716 11.128-26.865 11.128s-19.688-3.952-26.864-11.128a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0a13.64 13.64 0 0 0-9.705-4.02 13.64 13.64 0 0 0-9.705 4.02c-14.813 14.813-38.916 14.813-53.729 0-5.352-5.351-14.059-5.351-19.41 0-6.869 6.869-15.735 10.552-24.746 11.051Z" style="fill:%23008080"/></svg>');
+                }
+            }
+        }
+    }
+}
