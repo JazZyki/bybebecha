@@ -25,4 +25,15 @@ if (isProductDetailPage) {
 
     productInfoWrapper.insertAdjacentHTML("afterbegin", productVendor)
     productInfoWrapper.insertAdjacentHTML("afterbegin", productDetailHeader)
+
+    const infoTabItems = isProductDetailPage.querySelectorAll('.basic-description .tab-item')
+    if (infoTabItems.length) {
+      infoTabItems.forEach((item) => {
+        item.classList.add('closed')
+        const tabTitle = item.querySelector('h2')
+        tabTitle.addEventListener('click', () => {
+          item.classList.toggle('closed')
+        })
+      })
+    }
 }

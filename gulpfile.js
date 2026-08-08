@@ -10,19 +10,28 @@ const concat = require('gulp-concat');
 const terser = require('gulp-terser');
 const sftp = require('gulp-sftp-up4');
 const log = require('fancy-log');
+const browserSync = require('browser-sync').create(); // <--- PŘIDÁNO
 
-// --------------------
-// Konfigurace cest
-// --------------------
 const paths = {
     scss: 'app/scss/**/*.scss',
     js: 'app/js/*.js',
     dist: 'dist',
 };
 
-// --------------------
-// Styly (SASS -> CSS)
-// --------------------
+// Lokální server s HTTPS (Shoptet běží na https)
+function serve(done) {
+    browserSync.init({
+        server: {
+            baseDir: paths.dist,
+        },
+        port: 3000,
+        https: true, // Shoptet vyžaduje HTTPS zdroj pro přesměrování
+        cors: true,  // Povolí načítání napříč doménami
+        open: false
+    });
+    done();
+}
+
 function styles() {
     return src(paths.scss)
         .pipe(sourcemaps.init())
@@ -30,26 +39,22 @@ function styles() {
         .pipe(postcss([autoprefixer(), cssnano()]))
         .pipe(concat('style.min.css'))
         .pipe(sourcemaps.write('.'))
-        .pipe(dest(paths.dist));
+        .pipe(dest(paths.dist))
+        .pipe(browserSync.stream()); // <--- PŘIDÁNO: automaticky injectne nové CSS
 }
 
-// --------------------
-// Skripty (JS)
-// --------------------
 function scripts() {
     return src(paths.js)
         .pipe(sourcemaps.init())
         .pipe(concat('bundle.min.js'))
         .pipe(terser())
         .pipe(sourcemaps.write('.'))
-        .pipe(dest(paths.dist));
+        .pipe(dest(paths.dist))
+        .pipe(browserSync.stream());
 }
 
-// --------------------
-// SFTP Deploy (Shoptet)
-// --------------------
 function deploy() {
-    return src(`${paths.dist}/**/*`)
+    return src([`${paths.dist}/*.css`, `${paths.dist}/*.js`])
         .pipe(sftp({
             host: process.env.FTP_HOST,
             user: process.env.FTP_USER,
@@ -60,43 +65,21 @@ function deploy() {
         }))
         .on('error', function(err) {
             log.error('SFTP Chyba:', err.message);
-            this.emit('end'); // Důležité: zabrání pádu Gulp watcheru při chybě
+            this.emit('end');
         });
 }
 
-// --------------------
-// Watchery
-// --------------------
-
-// Standardní lokální watcher
 function watchFiles() {
     watch(paths.scss, styles);
     watch(paths.js, scripts);
 }
 
-// Watcher, který po každé změně provede build a hned nahrává
-function watchAndDeploy() {
-    // Sleduje změny, spustí build (styles/scripts) a následně deploy
-    watch(paths.scss, series(styles, deploy));
-    watch(paths.js, series(scripts, deploy));
-}
-
-// --------------------
-// Exporty (příkazy pro terminál)
-// --------------------
-
 exports.styles = styles;
 exports.scripts = scripts;
 exports.deploy = deploy;
 
-// Spustí build a pak hlídá změny (pouze lokálně)
+// Spustí lokální server a watcher pro okamžité náhledy
 // Příkaz: npx gulp dev
-exports.dev = series(parallel(styles, scripts), watchFiles);
+exports.dev = series(parallel(styles, scripts), parallel(serve, watchFiles));
 
-// Spustí build a hlídá změny + hned nahrává na SFTP
-// Příkaz: npx gulp watchDeploy
-exports.watchDeploy = series(parallel(styles, scripts), watchAndDeploy);
-
-// Výchozí úkol (pouze build)
-// Příkaz: npx gulp
 exports.default = parallel(styles, scripts);
