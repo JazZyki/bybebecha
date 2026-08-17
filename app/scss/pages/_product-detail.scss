@@ -70,7 +70,7 @@ $themes: (
                 }
             }
 
-            div, p {
+            div, p, ul {
                 height: auto;
                 padding: 1rem 0;
                 transition: all 0.3s ease-in;
@@ -82,7 +82,7 @@ $themes: (
                     transform: translateY(-50%) rotate(0deg);
                 }
 
-                div, p {
+                div, p, ul {
                     height: 0;
                     padding: 0;
                     overflow: hidden;
@@ -349,6 +349,57 @@ $themes: (
                 }
 
                 font-size: 0.8rem;
+            }
+        }
+    }
+
+    .p-detail-tabs-wrapper {
+        .responsive-nav {
+            .shp-tabs-holder {
+                background-color: transparent;
+                border: none;
+                border-bottom: 2px solid $col-primary;
+            }
+
+            .p-detail-tabs  {
+                display: flex;
+                justify-content: flex-start;
+                gap: 1rem;
+                background-color: transparent;
+
+                .shp-tab {
+                    font-size: 1.1rem;
+                    color: $col-primary;
+                    border: none;
+                    //border-bottom: 2px solid transparent;
+                    border-radius: 0.5rem 0.5rem 0 0;
+                    transition: all 0.3s ease-in;
+                    overflow: hidden;
+
+                    a {
+                        background-color: $col-primary-light;
+                        border: none;
+                    }
+
+                    &[data-testid="tabAlternativeProducts"] { 
+                        a {
+                            background-color: $col-secondary;
+                            color: $col-background;
+                        }
+                    }
+
+                    &.active {
+                        a {
+                            background-color: $col-primary-dark;
+                            color: $col-background;
+                        }
+                    }
+
+
+                    &:hover {
+                        color: $col-primary-dark;
+                    }
+                }
             }
         }
     }
