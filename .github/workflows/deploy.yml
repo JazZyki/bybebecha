@@ -1,4 +1,4 @@
-name: Build and Deploy to Shoptet FTP
+name: Build and Deploy to Shoptet SFTP
 
 on:
   push:
@@ -29,15 +29,13 @@ jobs:
       - name: 🏗️ Build project
         run: npm run build
 
-      - name: 🚀 Deploy to FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: 🚀 Deploy to SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.FTP_SERVER }}
+          port: '22'
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          local-dir: ./dist/
-          protocol: ftps # Vynutí SFTP (SSH)
-          port: 22
-          security: loose
-          dangerous-clean-slate: false
+          local_path: './dist/*'
+          remote_path: ${{ secrets.FTP_SERVER_DIR }}
+          sftp_only: true
