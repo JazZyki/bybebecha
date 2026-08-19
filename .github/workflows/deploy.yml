@@ -1,0 +1,46 @@
+name: Build and Deploy to Shoptet FTP
+
+on:
+  push:
+    branches:
+      - main # Nebo master – podle toho, jak máte pojmenovanou hlavní větev
+
+# Zabrání současnému běhu více deployů při rychlých commitech za sebou
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Krok: Stažení zdrojového kódu z repozitáře
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Krok: Příprava prostředí Node.js
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # 3. Krok: Instalace závislostí
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # 4. Krok: Sestavení produkčního buildu (vygeneruje složku dist/)
+      - name: 🏗️ Build project
+        run: npm run build
+
+      # 5. Krok: Nahrání obsahu složky dist/ na Shoptet FTP
+      - name: 🚀 Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          local-dir: ./dist/
+          dangerous-clean-slate: false # Nesmaže ostatní soubory na FTP, pouze přepíše/nahraje nové

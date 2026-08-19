@@ -1,4 +1,4 @@
-@use 'abstract' as *;
+@use '../abstract/' as *;
 
 html {
 	overflow-x: hidden;
@@ -10,7 +10,7 @@ html {
 	body {
 		@include basic-font;
 		color: $col-text;
-
+		
 		.header-navigation>div, 
 		.benefitBanner,
 		.content-wrapper.container {

@@ -1,4 +1,4 @@
-@use 'abstract' as *;
+@use "../abstract" as *;
 
 .navigation-buttons {
     a {
@@ -46,11 +46,14 @@ nav#navigation {
     }
 
     .menu-level-1 {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        width: 100%;
+        @include respond-to(md) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+
+        }
 
         li {
             border: none;
