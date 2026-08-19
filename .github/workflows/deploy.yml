@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
           local-dir: ./dist/
-          protocol: sftp # Vynutí SFTP (SSH)
+          protocol: ftps # Vynutí SFTP (SSH)
           port: 22
           security: loose
           dangerous-clean-slate: false
