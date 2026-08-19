@@ -39,5 +39,5 @@ jobs:
           local-dir: ./dist/
           protocol: ftps # Vynutí FTPS (TLS)
           port: 21
-          security: explicit
+          security: loose
           dangerous-clean-slate: false
