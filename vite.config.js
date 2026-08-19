@@ -12,10 +12,10 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    cssCodeSplit: false, // Zabrání rozdělení CSS do více souborů
     rollupOptions: {
       input: {
         bundle: resolve(import.meta.dirname, 'src/js/main.js'),
-        style: resolve(import.meta.dirname, 'src/scss/main.scss'),
       },
       output: {
         entryFileNames: 'custom.js',

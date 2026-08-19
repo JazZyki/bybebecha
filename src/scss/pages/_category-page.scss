@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "../abstract" as *;
 
 $category-themes: (
@@ -29,7 +30,7 @@ $category-themes: (
 
     @each $class, $colors in $category-themes {
         &.#{$class} {
-            @include wave-title(map-get($colors, text), map-get($colors, wave));
+            @include wave-title(map.get($colors, 'text'), map.get($colors, 'wave'));
         }
     }
 
