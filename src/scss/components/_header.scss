@@ -2,20 +2,24 @@
 
 header {
   &#header {
+    top: 0;
+
     @include respond-to(md) {
       position: sticky;
       top: 0;
       background-color: transparent;
       z-index: 1000;
+    }
 
-      .container {
+    .container {
+      @include respond-to(md) {
         max-width: 90vw;
         width: 100%;
         padding: 0;
         background-color: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(10px);
         transition: all 0.3s ease-in-out;
-
+  
         &::before,
         &::after {
           content: '';
@@ -25,82 +29,116 @@ header {
           height: 100%;
           background-color: rgba(255, 255, 255, 0.8);
           backdrop-filter: blur(10px);
-
+  
         }
-
+  
         &::before {
           left: -5vw;
         }
-
+  
         &::after {
           right: -5vw;
         }
+        
+      }
+    }
+
+    .header-top {
+      justify-content: space-between;
+
+      .site-name-wrapper,
+      .search,
+      .navigation-buttons {
+        flex: unset;
       }
 
-      .header-top {
-        justify-content: space-between;
+      .site-name {
+        top: 7px;
+      }
 
-        .site-name-wrapper,
-        .search,
-        .navigation-buttons {
-          flex: unset;
-        }
-
-        .site-name-wrapper {
+      .site-name-wrapper {
+        @include respond-to(md) {
           display: flex;
           justify-content: space-between;
           align-items: center;
           width: 70%;
         }
+      }
 
-        .search {
-          input[type='search'] {
-            padding: 5px 70px 5px 12px;
-            border: 1px solid $col-secondary;
-            border-radius: 2rem;
-          }
-
-          button[type='submit'] {
-            background-color: $col-secondary-darker;
-            color: white;
-            border-radius: 2rem;
-            padding: 5px 10px;
-            top: 0;
-            right: 70px;
-            font-size: 1rem;
-          }
+      .search {
+        input[type='search'] {
+          padding: 5px 70px 5px 12px;
+          border: 1px solid $col-secondary;
+          border-radius: 2rem;
         }
 
-        .navigation-buttons {
-          a {
-            &.btn.cart-count {
-              .cart-price {
-                display: none !important;
-              }
-            }
-          }
-
-          .top-nav-button-login {
-            width: 1.75rem;
-            height: 1.75rem;
-            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234F5A39" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-
-            span {
-              display: none;
-            }
-          }
+        button[type='submit'] {
+          background-color: $col-secondary-darker;
+          color: white;
+          border-radius: 2rem;
+          padding: 5px 10px;
+          top: 0;
+          right: 70px;
+          font-size: 1rem;
         }
       }
 
-      .header-title {
-        display: none;
+      .navigation-buttons {
+        a {
+          &.btn.cart-count {
+            top: 24px;
+            right: 115px;
+            @include respond-to(md) {
+              top: unset;
+              right: unset;
+            }
+            .cart-price {
+              display: none !important;
+            }
+          }
+        }
+
+        .toggle-window {
+          &[data-target="search"] {
+            margin-right: 45px;
+            border-radius: 50%;
+            background-color: transparent;
+            color: $col-primary;
+            font-weight: 900;
+          }
+
+        }
+
+        .top-nav-button-login {
+          position: absolute;
+          top: 11px;
+          right: 100px;
+          width: 1.75rem;
+          height: 1.75rem;
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="%234F5A39" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+
+          @include respond-to(md) {
+            position: relative;
+            top: unset;
+            right: unset;
+          }
+
+          span {
+            display: none;
+          }
+        }
       }
+    }
+
+    .header-title {
+      display: none;
     }
   }
 }
+
 
 .scrolled {
   header#header {
@@ -171,9 +209,11 @@ body {
   }
 
   &.submenu-visible {
-    &::after {
-      display: block;
-      opacity: 1;
+    @include respond-to(md) {
+      &::after {
+        display: block;
+        opacity: 1;
+      }
     }
   }
 }

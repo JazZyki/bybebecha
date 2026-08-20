@@ -60,6 +60,7 @@ nav#navigation {
 
             &.ext {
                 .submenu-arrow {
+                    @include respond-to(md) {                       
                     display: inline-block;
                     font-size: 0.9rem;
 
@@ -68,6 +69,7 @@ nav#navigation {
                         top: 50%;
                     }
                 }
+                }
 
                 a {
                     padding-right: 2rem;
@@ -75,25 +77,27 @@ nav#navigation {
             }
 
             &.exp {
-                .menu-level-2 {
-                    display: grid;
-                    grid-template-columns: repeat(2, 1fr);
-                    grid-template-rows: repeat(6, auto);
-                    grid-auto-flow: row dense;
-                    gap: 2rem;
-                    min-width: 50vw;
-
-                    li {
-                        &:not(.menu-banner) {
-                            grid-column: 1;
-                            grid-row: span 2;
-                            gap: 1rem;
-                            align-items: flex-start;
-                        }
-
-                        &.menu-banner {
-                            grid-column: 2;
-                            grid-row: span 3;
+                @include respond-to(md) {
+                    .menu-level-2 {
+                        display: grid;
+                        grid-template-columns: repeat(2, 1fr);
+                        grid-template-rows: repeat(6, auto);
+                        grid-auto-flow: row dense;
+                        gap: 2rem;
+                        min-width: 50vw;
+    
+                        li {
+                            &:not(.menu-banner) {
+                                grid-column: 1;
+                                grid-row: span 2;
+                                gap: 1rem;
+                                align-items: flex-start;
+                            }
+    
+                            &.menu-banner {
+                                grid-column: 2;
+                                grid-row: span 3;
+                            }
                         }
                     }
                 }
@@ -128,136 +132,139 @@ nav#navigation {
     }
 
     .menu-level-2 {
-        top: 105%;
-        //border: 2px solid $col-primary;
-        border-radius: 1rem;
-        filter: drop-shadow($shadow);
-
-        li {
-            width: 100%;
-            padding: 1rem;
-
-            &.has-third-level {
-                .menu-image {
-                    width: 115px;
-                    height: 115px;
-                    padding: 0;
-                    border-radius: 1rem;
-                    background-color: transparent;
-                    overflow: hidden;
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        max-width: 100%;
-                        max-height: 100%;
-                    }
-                }
-
-                div {
-                    >a {
-                        background-color: transparent;
-                        color: $col-primary;
-                        text-decoration: none;
+        @include respond-to(md) {
+            top: 105%;
+            //border: 2px solid $col-primary;
+            border-radius: 1rem;
+            filter: drop-shadow($shadow);
+    
+            li {
+                width: 100%;
+                padding: 1rem;
+    
+                &.has-third-level {
+                    .menu-image {
+                        width: 115px;
+                        height: 115px;
                         padding: 0;
-                        transition: all 0.3s ease-in-out;
-
-                        &:hover {
-                            color: $col-primary-dark;
-                            text-decoration: underline;
+                        border-radius: 1rem;
+                        background-color: transparent;
+                        overflow: hidden;
+    
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            max-width: 100%;
+                            max-height: 100%;
                         }
                     }
-
-                    .menu-level-3 {
-                        max-height: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: flex-start;
-
-                        li {
-                            width: max-content;
+    
+                    div {
+                        >a {
+                            background-color: transparent;
+                            color: $col-primary;
+                            text-decoration: none;
                             padding: 0;
-
-                            a {
-                                background-color: transparent;
-                                color: $col-primary;
-                                text-decoration: none;
+                            transition: all 0.3s ease-in-out;
+    
+                            &:hover {
+                                color: $col-primary-dark;
+                                text-decoration: underline;
+                            }
+                        }
+    
+                        .menu-level-3 {
+                            max-height: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: flex-start;
+    
+                            li {
+                                width: max-content;
                                 padding: 0;
-                                transition: all 0.3s ease-in-out;
-                                text-transform: none;
-
-                                &:hover {
-                                    color: $col-primary-dark;
-                                    text-decoration: underline;
+    
+                                a {
+                                    background-color: transparent;
+                                    color: $col-primary;
+                                    text-decoration: none;
+                                    padding: 0;
+                                    transition: all 0.3s ease-in-out;
+                                    text-transform: none;
+    
+                                    &:hover {
+                                        color: $col-primary-dark;
+                                        text-decoration: underline;
+                                    }
+                                }
+                            }
+    
+                            .more-items-trigger {
+                                position: relative;
+                                width: 12px;
+                                margin-top: 0.5rem;
+                            }
+                        }
+                    }
+                }
+    
+                &.menu-banner {
+                    >div {
+                        width: 100%;
+                        height: 100%;
+                        padding: 0;
+                        background-color: transparent;
+    
+                        .banner {
+                            margin: 0;
+                        }
+    
+                        .banner-wrapper {
+                            a {
+                                padding: 0 !important;
+                                border-radius: 1rem;
+                                overflow: hidden;
+                            }
+    
+                            .extended-banner-texts {
+                                .extended-banner-title {
+                                    top: 1.5rem;
+                                    color: $col-primary;
+                                    font-size: 1.25rem;
+                                }
+    
+                                .extended-banner-text {
+                                    top: 4rem;
+                                    bottom: unset;
+                                    color: $col-primary;
+                                    text-transform: none;
+                                }
+    
+                                .extended-banner-link {
+                                    height: max-content;
+                                    margin-top: -5px;
+                                    right: 1rem;
+                                    bottom: 1rem;
+                                    top: unset;
+                                    background-color: $col-primary;
+                                    border-radius: 2rem;
+                                    padding: 0.5rem 1rem;
+                                    border: none;
                                 }
                             }
                         }
-
-                        .more-items-trigger {
-                            position: relative;
-                            width: 12px;
-                            margin-top: 0.5rem;
+    
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            max-width: 100%;
+                            max-height: 200px;
                         }
                     }
                 }
             }
-
-            &.menu-banner {
-                >div {
-                    width: 100%;
-                    height: 100%;
-                    padding: 0;
-                    background-color: transparent;
-
-                    .banner {
-                        margin: 0;
-                    }
-
-                    .banner-wrapper {
-                        a {
-                            padding: 0 !important;
-                            border-radius: 1rem;
-                            overflow: hidden;
-                        }
-
-                        .extended-banner-texts {
-                            .extended-banner-title {
-                                top: 1.5rem;
-                                color: $col-primary;
-                                font-size: 1.25rem;
-                            }
-
-                            .extended-banner-text {
-                                top: 4rem;
-                                bottom: unset;
-                                color: $col-primary;
-                                text-transform: none;
-                            }
-
-                            .extended-banner-link {
-                                height: max-content;
-                                margin-top: -5px;
-                                right: 1rem;
-                                bottom: 1rem;
-                                top: unset;
-                                background-color: $col-primary;
-                                border-radius: 2rem;
-                                padding: 0.5rem 1rem;
-                                border: none;
-                            }
-                        }
-                    }
-
-                    img {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                        max-width: 100%;
-                        max-height: 200px;
-                    }
-                }
-            }
+            
         }
     }
 }
