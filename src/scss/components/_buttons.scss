@@ -18,15 +18,17 @@ button {
     border-radius: 2rem;
   }
 
-  &.btn-carousel-hp {
+  &.btn-carousel-hp, 
+  &.btn-conversion {
     padding: 1.5rem 2rem 1.2rem;
     background-color: $col-primary;
     color: #ffffff !important;
+    font-weight: 400;
     border: 1px solid $col-primary;
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 
     &:hover {
-      background-color: transparent;
+      background-color: transparent !important;
       color: $col-primary !important;
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(79, 90, 57, 0.25);
@@ -35,6 +37,13 @@ button {
     &:active {
       transform: translateY(-1px);
     }
+  }
+
+  &.btn-conversion {
+    width: max-content;
+    font-size: 1.2rem !important;
+    line-height: 1 !important;
+    padding: 1rem 2rem 1rem !important;
   }
 
   &.btn-secondary {

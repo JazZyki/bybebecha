@@ -104,9 +104,10 @@ header {
             border-radius: 50%;
             background-color: transparent;
             color: $col-primary;
-            font-weight: 900;
+            &::before {
+              font-weight: 900;
+            }
           }
-
         }
 
         .top-nav-button-login {
@@ -224,14 +225,23 @@ body {
     .cart-widget,
     .user-action-login {
       position: fixed;
-      top: 97px;
       z-index: 1001;
-      left: unset;
+      left: 0;
+      top: 60px;
       right: calc(5vw + 1.5rem);
+      @include respond-to(md) {
+        top: 97px;
+        left: unset;
+      }
     }
 
     .user-action-login {
-      right: calc(5vw - 1.5rem);
+      padding-top: 0;
+      top: 60px;
+      right: 0;
+      @include respond-to(md) {
+        right: calc(5vw - 1.5rem);
+      }
     }
   }
 }

@@ -4,7 +4,11 @@
     display: grid;
     gap: 3rem;
     grid-auto-flow: row;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    
+    @include respond-to(md) {
+        grid-template-columns: 1fr 1fr;
+    }
 
     &.products {
         .product {

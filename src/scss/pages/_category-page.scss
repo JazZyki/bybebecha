@@ -59,12 +59,28 @@ $category-themes: (
         gap: 2rem;
 
         .product {
-            width: calc(25% - 2rem);
+            width: calc(50% - 1rem);
             padding: 0;
             background-color: #ffffff;
             border-radius: 1rem;
             overflow: hidden;
             transition: all 0.3s ease-in;
+            @include respond-to(md) {
+                width: calc(25% - 2rem);
+            }
+
+            .p {
+                flex-direction: column;
+                @include respond-to(md) {
+                    flex-direction: row;
+                }
+                .p-in {
+                    width: 100%;
+                    @include respond-to(md) {
+                        width: calc(100% - 90px);
+                    }
+                }
+            }
 
             .image {
                 min-height: 70px;
@@ -92,12 +108,18 @@ $category-themes: (
     }
 
     .subcategories {
-        gap: 3rem;
+        gap: 1rem;
         margin: 3rem 0;
+        @include respond-to(md) {
+            gap: 3rem;
+        }
 
         li {
-            width: calc(20% - 1.5rem);
+            width: 100%;
             padding: 0;
+            @include respond-to(md) {
+                width: calc(20% - 1.5rem);
+            }
 
             a {
                 height: 100px;
