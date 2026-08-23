@@ -1,0 +1,31 @@
+@use "../abstract" as *;
+
+nav.pagination {
+    ul {
+        align-items: center;
+
+        li {
+            .pagination__currentPage {
+                @include expressive-font;
+            }
+
+            .pagination__link {
+                border-radius: 2rem;
+                @include expressive-font;
+            }
+        }
+    }
+}
+
+.listingControls {
+    .goToTop {
+        .btn {
+            padding-left: 3rem;
+            &::before {
+                position: absolute;
+                top: 50%;
+                left: 1.25rem;
+            }
+        }
+    }
+}

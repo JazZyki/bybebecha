@@ -1,8 +1,12 @@
 @use "../abstract" as *;
 
 .breadcrumbs-wrapper.container {
-    width: 90vw;
-    position: relative;
+    display: none;
+    @include respond-to(md) {
+        display: block;
+        width: 90vw;
+        position: relative;
+    }
 
     &,
     &::after,

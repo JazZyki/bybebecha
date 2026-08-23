@@ -13,7 +13,6 @@
     &.products {
         .product {
             width: 100%;
-            max-height: 370px;
             position: relative;
             border: none !important;
             background: white;
@@ -21,6 +20,9 @@
             padding: 0;
             box-shadow: 0.5rem 0.5rem 1rem #efefef;
             overflow: hidden;
+            @include respond-to(md) {
+                max-height: 370px;
+            }
 
             &::before, 
             &::after {
@@ -82,9 +84,15 @@
             }
 
             .p {
-                display: grid;
-                grid-auto-flow: column;
-                grid-template-columns: 3fr 2fr;
+                display: flex;
+                flex-direction: column;
+                
+                @include respond-to(md) {
+                    display: grid;
+                    grid-auto-flow: column;
+                    grid-template-columns: 3fr 2fr;
+                }
+                
 
                 .p-code {
                     font-size: 0.8rem;
@@ -111,39 +119,66 @@
                 }
 
                 .p-in {
-                    padding: 2rem;
+                    padding: 0 1rem;
+                    @include respond-to(md) {
+                        padding: 2rem;
+                    }
                 }
 
                 .p-in-in {
                     .name {
-                        margin-top: 1rem;
+                        margin-top: 0;
                         position: relative;
                         height: unset;
                         font-size: 1.2rem;
                         font-weight: 500;
+                        letter-spacing: -0.5px;
                         color: $col-text;
                         overflow: unset;
                         @include expressive-font;
+                        @include respond-to(md) {
+                            margin-top: 1rem;                            
+                        }
 
                         &::after {
                             content: '';
                             position: absolute;
                             bottom: -12px;
-                            left: 0;
-                            width: 130px;
+                            left: 50%;
+                            width: 70px;
                             height: 6px;
                             background-size: contain;
                             background-repeat: no-repeat;
+                            transform: translateX(-50%);
+                            @include respond-to(md) {
+                                left: 0;
+                                transform: translateX(0);
+                            }
+                        }
+                    }
+
+                    .ratings-wrapper {
+                        display: none;
+                        @include respond-to(md) {
+                            display: flex;
                         }
                     }
                 }
 
                 .p-bottom {
+                    padding: 1rem 0;
+                    @include respond-to(md) {
+                        padding: 0;
+                    }
                     .p-desc {
+                        display: none;
                         order: 1;
                         margin-bottom: 2rem;
                         font-size: 1rem;
                         max-height: 90px;
+                        @include respond-to(md) {
+                            display: block;
+                        }
                     }
                     .prices {
                         order: 2;

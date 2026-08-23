@@ -1,12 +1,12 @@
 @use "../abstract" as *;
 
-.navigation-buttons {
+/*.navigation-buttons {
     a {
         color: black;
     }
-}
+}*/
 
-.header-navigation {
+/*.header-navigation {
     >div {
         display: flex;
         justify-content: flex-start;
@@ -14,6 +14,7 @@
         gap: 5%;
 
         .site-name {
+            z-index: 1001;
             order: 1;
         }
 
@@ -23,8 +24,13 @@
         }
     }
 }
+*/
 
 nav#navigation {
+    padding-top: 4rem;
+    @include respond-to(md) {
+        padding-top: 0;
+    }
     @include expressive-font;
 
     @include respond-to(lg) {
@@ -32,18 +38,22 @@ nav#navigation {
     }
 
     .navigation-in {
+        padding: 0 2rem;
         width: 100%;
         background-color: transparent;
+        @include respond-to(md) {
+            padding: 0;
+        }
     }
 
-    .site-name {
+    /*.site-name {        
         order: 1;
     }
 
     .navigation-buttons {
         order: 3;
         display: flex;
-    }
+    }*/
 
     .menu-level-1 {
         @include respond-to(md) {
@@ -52,11 +62,13 @@ nav#navigation {
             align-items: center;
             gap: 1rem;
             width: 100%;
-
         }
 
         li {
-            border: none;
+            border-bottom: 1px solid $col-secondary-light;
+            @include respond-to(md) {
+                border: none;
+            }
 
             &.ext {
                 .submenu-arrow {
@@ -72,7 +84,10 @@ nav#navigation {
                 }
 
                 a {
-                    padding-right: 2rem;
+                    padding-right: 0;
+                    @include respond-to(md) {
+                        padding-right: 2rem;
+                    }
                 }
             }
 
@@ -104,13 +119,17 @@ nav#navigation {
             }
 
             a {
-                padding: 0.5rem 1.5rem;
-                font-size: 1rem;
+                justify-content: space-between;
+                padding: 0.25rem 0;
+                font-size: 1.1rem;
                 color: $col-primary;
                 text-transform: uppercase;
                 background-color: transparent;
                 border-radius: 1rem;
                 transition: all 0.3s ease-out;
+                @include respond-to(md) {
+                    padding: 0.5rem 1.5rem;
+                }
 
                 &:hover {
                     margin: 0;
@@ -123,20 +142,44 @@ nav#navigation {
 
             &:hover {
                 a {
-                    margin: 0;
-                    color: white;
-                    background-color: $col-primary;
+                    @include respond-to(md) {
+                        margin: 0;
+                        color: white;
+                        background-color: $col-primary;
+                    }
                 }
             }
         }
     }
 
     .menu-level-2 {
+        li {
+            padding: 0.75rem 0;
+
+            &.menu-banner {
+                padding: 0 0 0.75rem 0;
+
+                .banner {
+                    margin: 0;
+                }
+
+                .extended-banner-link {
+                    visibility: hidden;
+                }
+                .extended-banner-title,
+                .extended-banner-text {
+                    width: 100%;
+                    max-width: 100%;
+                }
+                .extended-banner-title {
+                    font-size: 1.1rem;
+                }
+            }
+        }
         @include respond-to(md) {
             top: 105%;
-            //border: 2px solid $col-primary;
             border-radius: 1rem;
-            filter: drop-shadow($shadow);
+            filter: drop-shadow($shadow-light);
     
             li {
                 width: 100%;
@@ -241,7 +284,8 @@ nav#navigation {
                                 }
     
                                 .extended-banner-link {
-                                    height: max-content;
+                                    visibility: hidden;
+                                    /*height: max-content;
                                     margin-top: -5px;
                                     right: 1rem;
                                     bottom: 1rem;
@@ -249,7 +293,7 @@ nav#navigation {
                                     background-color: $col-primary;
                                     border-radius: 2rem;
                                     padding: 0.5rem 1rem;
-                                    border: none;
+                                    border: none;*/
                                 }
                             }
                         }
@@ -265,6 +309,18 @@ nav#navigation {
                 }
             }
             
+        }
+    }
+
+    .navigationActions {
+        li {
+            border-color: $col-secondary-light;
+            a {
+                padding: 0.25rem 0;
+                font-size: 1.1rem;
+                color: $col-primary;
+                text-transform: uppercase;
+            }
         }
     }
 }

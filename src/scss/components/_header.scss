@@ -3,6 +3,11 @@
 header {
   &#header {
     top: 0;
+    padding: 0.5rem 0;
+    @include respond-to(md) {
+      padding: 0;
+    }
+
 
     @include respond-to(md) {
       position: sticky;
@@ -53,7 +58,11 @@ header {
       }
 
       .site-name {
-        top: 7px;
+        z-index: 1001;
+        top: 0;
+        @include respond-to(md) {
+          top: 7px;
+        }
       }
 
       .site-name-wrapper {
@@ -143,6 +152,9 @@ header {
 
 .scrolled {
   header#header {
+    .site-name {
+      transform: none!important;
+    }
     @include respond-to(md) {
       top: 10px;
 
@@ -151,7 +163,7 @@ header {
         padding: 0 3rem;
         border: 3px solid $col-primary;
         border-radius: 5rem;
-        filter: drop-shadow($shadow);
+        filter: drop-shadow($shadow-light);
 
         &::before,
         &::after {
@@ -241,6 +253,76 @@ body {
       right: 0;
       @include respond-to(md) {
         right: calc(5vw - 1.5rem);
+      }
+    }
+
+    .cart-widget {
+      border-radius: 0 0 1.7rem 1.7rem;
+      //overflow: hidden;
+      .cart-widget-products {
+        .cart-widget-product {
+          &-image {
+            a,
+            img {
+              width: 100%;
+              object-fit: cover;
+            }
+          }
+
+          &-amount {
+            button {
+              padding: 0.5rem 0.5rem;
+              right: -2px;
+              font-size: 1rem;
+              border-radius: 1rem 1rem 0 0;
+              background-color: $col-primary-dark;
+              color: white;
+
+              &.decrease {
+                border-radius: 0 0 1rem 1rem;
+              }
+            }
+
+            .quantity {
+              padding-right: 25px;
+              font-size: 1rem;
+              font-weight: 500;
+              color: $col-text;
+              border: 1px solid $col-primary-dark;
+              border-radius: 1rem 0.5rem .5rem 1rem;              
+            }
+          }
+
+          &-name {
+            strong {
+              font-size: .9rem;
+              font-weight: 700;
+              color: $col-primary;
+            }
+            [data-testid="cartWidgetProductPrice"] {
+              @include expressive-font;
+              font-size: .9rem;
+              font-weight: 700;
+              color: $col-secondary;
+            }
+          }
+
+          &-delete {
+            visibility: visible;
+
+            button {
+              &::before {
+                font-size: .9rem;
+                color: $col-secondary-darker;
+              }
+            }
+          }
+        }
+      }
+ 
+      .cart-widget-button {
+        padding: 1rem 0 0;
+        border-radius: 0 0 1.7rem 1.7rem;
       }
     }
   }

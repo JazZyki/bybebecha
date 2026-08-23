@@ -21,6 +21,10 @@
                 background-size: contain;
                 background-repeat: no-repeat;
             }
+
+            strong {
+                color: $col-secondary;
+            }
         }
 
         > div {
@@ -30,11 +34,15 @@
         img {
             width: 100%;
             max-width: 600px;
-            margin: 0 3rem 0 0;
+            margin: 2rem auto;
             float: left;
             border-radius: 1rem;
             transform: rotate(-2deg);
-            box-shadow: $shadow;
+            box-shadow: $shadow-medium;
+            
+            @include respond-to(md) {
+                margin: 0 3rem 0 0;
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ html {
 	body {
 		@include basic-font;
 		color: $col-text;
+		background-color: $col-background;
 		
 		.header-navigation>div, 
 		.benefitBanner,
@@ -25,6 +26,10 @@ html {
 			color: $col-text !important;
 			font-size: 1.2rem;
 			@include basic-font;
+
+			b {
+				color: $col-primary;
+			}
 		}
 	}	
 

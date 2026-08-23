@@ -13,3 +13,9 @@ if (selectedProductsSectionTitle) {
 
     selectedProductsSectionTitle.innerHTML = selectedProductSectionHTML;
 }
+
+const eshopHeader = document.querySelector('.welcome-wrapper .h1');
+if (eshopHeader) {
+    const eshopHeaderHTML = eshopHeader.innerHTML.replace('bybebecha.cz', '<strong>bybebecha.cz</strong>');
+    eshopHeader.innerHTML = eshopHeaderHTML;
+}
