@@ -111,12 +111,11 @@ $themes: (
         .our-tip {
             display: inline-block;
             width: 40%;
-            margin: 1rem 0 1rem 3rem;
-            padding: 1.5rem 1.5rem 1.5rem 11rem;
+            margin: 0;
+            padding: 1.5rem;
             position: relative;
             border: 1px solid #C3635C;
             border-radius: 1rem;
-            float: right;
             font-size: 1.3rem;
 
             &::before {
@@ -161,17 +160,6 @@ $themes: (
 
             ul {
                 margin: 0;
-            }
-
-            &.two-quaters-width {
-                width: 100%;
-                margin: 1rem 0 1rem 3rem;
-                padding: 1.5rem 1.5rem 1.5rem 11rem;
-            }
-            &.full-width {
-                width: 100%;
-                margin: 1rem 0;
-                padding: 1.5rem 1.5rem 1.5rem 11rem;
             }
         }
     }
@@ -221,7 +209,7 @@ $themes: (
                 }
 
                 &.highlighted {
-                    border-right: 3px solid $col-primary;
+                    border: none;
                 }
             }
         }
@@ -281,30 +269,39 @@ $themes: (
         }
 
         .add-to-cart {
-            background-color: $col-primary;
-            border: none;
-            border-radius: 2rem;
+            gap: 2rem;
+            background-color: transparent;
+            //border: none;
+            border-radius: 0;
 
             .quantity {
-                border: none;
+                background-color: transparent;
+                border: 1px solid $col-primary;
                 height: 100%;
+                border-radius: 2rem 1rem 1rem 2rem;
 
                 label {
-                    color: $col-background;
+                    color: $col-primary;
                     font-size: 1.25rem;
                     height: 100%;
 
                     input {
                         height: 100%;
+                        padding-right: 0.5rem;
                     }
                 }
 
                 button {
-                    height: 26px;
+                    height: 28px;
                     background-color: $col-primary-dark;
                     color: $col-background;
                     border: none;
                     transition: all 0.3s ease-in;
+                    border-radius: 2rem 2rem 0 0;
+
+                    &.decrease {
+                        border-radius: 0 0 2rem 2rem;
+                    }
 
                     &:hover {
                         color: $col-primary-dark;
@@ -319,15 +316,20 @@ $themes: (
                 font-size: 1.25rem;
                 height: 100%;
                 transition: all 0.3s ease-in;
-                border-radius: 0 2rem 2rem 0;
+                border-radius: 2rem;
+                padding-right: 3rem !important;
 
                 &::before {
-                    content: none;
+                    position: absolute;
+                    right: 1rem;
+                    transition: all 0.3s ease-in;
                 }
 
                 &:hover {
-                    padding-left: 2rem;
                     background-color: $col-primary-dark;
+                    &::before {
+                        right: 0.5rem;
+                    }
                 }
             }
         }

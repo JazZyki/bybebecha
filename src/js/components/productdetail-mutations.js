@@ -40,6 +40,6 @@ if (isProductDetailPage) {
     const ourTipDiv = isProductDetailPage.querySelector('.basic-description .our-tip')
     if (ourTipDiv) {
       const ourTipPlaceholder = isProductDetailPage.querySelector('.extended-description')
-      ourTipPlaceholder.insertAdjacentElement("beforeend", ourTipDiv)
+      ourTipPlaceholder.insertAdjacentElement("afterbegin", ourTipDiv)
     }
 }
