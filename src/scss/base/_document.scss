@@ -15,7 +15,14 @@ html {
 		.header-navigation>div, 
 		.benefitBanner,
 		.content-wrapper.container {
-			width: 90vw;
+			width: 98vw;
+			@include respond-to('md') {
+				width: 90vw;
+			}
+		}
+
+		.content-inner {
+			max-width: unset;
 		}
 
 		h1, h2, h3, h4, h5, h6, .homepage-group-title  {
@@ -24,11 +31,42 @@ html {
 
 		p {
 			color: $col-text !important;
-			font-size: 1.2rem;
+			font-size: 1.2rem ;
 			@include basic-font;
 
 			b {
 				color: $col-primary;
+			}
+		}
+
+		.basic-description, .extended-description {			
+			font-size: 1.2rem !important;
+			ul {
+				list-style: none;
+				padding-left: 2rem;
+				
+				li {
+					position: relative;
+					margin-bottom: 1rem;
+					font-size: 1.1rem!important;
+	
+					&:before {
+						content: "";
+						color: $col-primary;
+						display: inline-block; 
+						width: 1.5rem;
+						height: 1.5rem;
+						position: absolute;
+						top: 0;
+						left: -2rem;
+						background-image: url('/user/documents/upload/product-info/list-marker.svg');
+					}
+
+					strong,
+					b {
+						color: $col-primary;
+					}
+				}
 			}
 		}
 	}	
