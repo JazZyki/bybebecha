@@ -1,0 +1,70 @@
+@use '../abstract' as *;
+
+footer#footer {
+    .container {
+        width: 90vw;
+        background-color: $col-primary;
+        box-shadow: 5vw 1px 0 $col-primary, -5vw 1px 0 $col-primary;
+
+        &.footer-bottom {
+            background-color: $col-primary-dark;
+            box-shadow: 5vw 1px 0 $col-primary-dark, -5vw 1px 0 $col-primary-dark;
+        }
+
+        .site-name {
+            max-width: 160px;
+            img {
+                width: 100%;
+            }
+        }
+
+        #signature {
+            img {
+                filter: grayscale(1) contrast(0.5) brightness(2.5);
+            }
+
+            a {
+                color: $col-primary-light;
+                text-decoration: none;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    color: $col-secondary-light;
+                }
+            }
+
+            .my-signature {
+                display: inline-block;
+                margin-left: 1ch;
+                color: white;
+            }
+        }
+
+        .copyright {
+            color: white;
+            a {
+                color: $col-primary-light;
+            }
+        }
+
+        .custom-footer {
+            padding-top: 2rem;
+            
+            h3 {
+                margin: 0 0 1rem;
+                text-transform: uppercase;
+                font-size: 1.2rem;
+                color: white;
+            }
+
+            ul{
+                li {
+                    &,
+                    a {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}
