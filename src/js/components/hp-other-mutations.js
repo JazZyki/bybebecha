@@ -19,3 +19,15 @@ if (eshopHeader) {
     const eshopHeaderHTML = eshopHeader.innerHTML.replace('bybebecha.cz', '<strong>bybebecha.cz</strong>');
     eshopHeader.innerHTML = eshopHeaderHTML;
 }
+
+const isBlogWrapper = document.querySelector('.homepage-blog-wrapper');
+if (isBlogWrapper) {
+    const blogSectionTitle = isBlogWrapper.querySelector('.homepage-group-title.h4');
+    blogSectionTitle.innerHTML = '<div>Nejnovější články <strong>z blogu</strong></div>';
+
+    const blogSectionLink = document.createElement('div');
+    blogSectionLink.classList.add('products-section-link');
+    blogSectionLink.innerHTML = '<a href="/blog" class="btn btn-secondary has-arrow">Všechny články</a>';
+
+    isBlogWrapper.appendChild(blogSectionLink);
+}

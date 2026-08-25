@@ -1,0 +1,77 @@
+@use '../abstract' as *;
+
+.type-page {
+    .pageArticleDetail {
+        
+        p,
+        li {
+            font-size: 1.2rem !important;
+            line-height: 1.65;
+    
+            strong {
+                color: $col-secondary;
+                font-weight: 600;
+            }
+        }
+    
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            @include expressive-font;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: $col-primary;
+    
+            strong {
+                color: $col-secondary;
+            }
+        }
+    
+        h3 {
+            font-size: 1.5rem;
+        }
+    
+        .intro-image {
+            display: flex;
+            align-items: flex-end;
+            margin: -0.1rem -2.1rem 2rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(79, 90, 57, 0.08);
+            border: 1px solid rgba(79, 90, 57, 0.1);
+            max-height: 60vh;
+    
+            img {
+                width: 100%;
+                height: auto;
+                display: block;
+                object-fit: cover;
+            }
+        }
+    
+        .float-right {
+            float: right;
+            margin: 0 0 1rem 1.5rem;
+            max-width: 25vw;
+    
+            img {
+                @include respond-to('md') {
+                    max-width: 25vw;
+                    max-height: 80vh;
+                    object-fit: contain;
+                    transform: rotate(3deg);
+                    border-radius: 1rem;
+                    box-shadow: $shadow-medium;
+                }
+            }
+        }
+    
+        .float-left {
+            float: left;
+            margin: 0 1.5rem 1rem 0;
+            max-width: 50%;
+        }
+    }
+}

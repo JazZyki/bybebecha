@@ -1,6 +1,7 @@
 @use '../abstract' as *;
 
-.in-blog {
+.in-blog,
+.type-page {
     .article-products-widget {
         &__header {
             margin-bottom: 1rem;
@@ -114,7 +115,8 @@
         }
     }
 
-    h1[itemprop="headline"] {
+    h1[itemprop="headline"],
+    header[itemprop="headline"] {
         display: none;
     }
 

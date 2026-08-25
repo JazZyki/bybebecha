@@ -154,15 +154,18 @@ $category-themes: (
         gap: 1rem;
         margin: 3rem 0;
         @include respond-to(md) {
-            gap: 3rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            
         }
 
         li {
             width: 100%;
             padding: 0;
-            @include respond-to(md) {
+            /*@include respond-to(md) {
                 width: calc(20% - 1.5rem);
-            }
+            }*/
 
             a {
                 height: 100px;
@@ -183,6 +186,7 @@ $category-themes: (
                 }
 
                 .text {
+                    @include expressive-font;
                     margin-left: 0.5rem;
                     font-size: 1rem;
                     color: $col-primary;
