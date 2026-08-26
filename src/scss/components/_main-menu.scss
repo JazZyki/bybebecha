@@ -155,6 +155,9 @@ nav#navigation {
     .menu-level-2 {
         li {
             padding: 0.75rem 0;
+            &.menu-item--hidden {
+                display: none;
+            }
 
             &.menu-banner {
                 padding: 0 0 0.75rem 0;

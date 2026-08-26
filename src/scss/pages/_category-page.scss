@@ -167,6 +167,10 @@ $category-themes: (
                 width: calc(20% - 1.5rem);
             }*/
 
+            &.menu-item--hidden {
+                display: none;
+            }
+
             a {
                 height: 100px;
                 padding: 0;
@@ -213,4 +217,5 @@ $category-themes: (
             }
         }
     }
+
 }

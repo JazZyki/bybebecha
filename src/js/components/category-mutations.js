@@ -41,3 +41,12 @@ document.addEventListener('ShoptetPagePaginationDone', applyCategoryClasses);
 if (document.readyState !== 'loading') {
   applyCategoryClasses();
 }
+
+const isImunitaKat = document.querySelector('.subcategories li a[href="/imunita/"]');
+const isCategoryPage = document.body.classList.contains('type-category');
+if (isImunitaKat && isCategoryPage) {
+  const imunitaParent = isImunitaKat.closest('li');
+  if (imunitaParent) {
+    imunitaParent.classList.add('menu-item--hidden');
+  }
+}

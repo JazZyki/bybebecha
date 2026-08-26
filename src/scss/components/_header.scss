@@ -4,6 +4,7 @@ header {
   &#header {
     top: 0;
     padding: 0.5rem 0;
+
     @include respond-to(md) {
       padding: 0;
     }
@@ -24,7 +25,7 @@ header {
         background-color: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(10px);
         transition: all 0.3s ease-in-out;
-  
+
         &::before,
         &::after {
           content: '';
@@ -34,17 +35,17 @@ header {
           height: 100%;
           background-color: rgba(255, 255, 255, 0.8);
           backdrop-filter: blur(10px);
-  
+
         }
-  
+
         &::before {
           left: -5vw;
         }
-  
+
         &::after {
           right: -5vw;
         }
-        
+
       }
     }
 
@@ -60,6 +61,8 @@ header {
       .site-name {
         z-index: 1001;
         top: 0;
+        display: block;
+
         @include respond-to(md) {
           top: 7px;
         }
@@ -90,6 +93,38 @@ header {
           right: 70px;
           font-size: 1rem;
         }
+
+        .search-whisperer {
+          max-height: 70vh;
+          overflow-y: auto;
+
+          .search-whisperer-products {
+            li {
+              a {
+                .search-whisperer-image {
+                  max-width: 80px;
+                }
+
+                .p-info {
+                  .p-name {
+                    font-size: 0.9rem;
+                    color: $col-primary;
+                  }
+                }
+
+                .price {
+                  font-size: 0.9rem;
+                  color: $col-secondary-darker;
+                  position: absolute;
+                  left: 91px;
+                  bottom: 13px;
+                  text-align: left;
+                  @include expressive-font;
+                }
+              }
+            }
+          }
+        }
       }
 
       .navigation-buttons {
@@ -97,10 +132,12 @@ header {
           &.btn.cart-count {
             top: 24px;
             right: 115px;
+
             @include respond-to(md) {
               top: unset;
               right: unset;
             }
+
             .cart-price {
               display: none !important;
             }
@@ -113,6 +150,7 @@ header {
             border-radius: 50%;
             background-color: transparent;
             color: $col-primary;
+
             &::before {
               font-weight: 900;
             }
@@ -153,8 +191,9 @@ header {
 .scrolled {
   header#header {
     .site-name {
-      transform: none!important;
+      transform: none !important;
     }
+
     @include respond-to(md) {
       top: 10px;
 
@@ -241,6 +280,7 @@ body {
       left: 0;
       top: 60px;
       right: calc(5vw + 1.5rem);
+
       @include respond-to(md) {
         top: 97px;
         left: unset;
@@ -251,6 +291,7 @@ body {
       padding-top: 0;
       top: 60px;
       right: 0;
+
       @include respond-to(md) {
         right: calc(5vw - 1.5rem);
       }
@@ -258,10 +299,12 @@ body {
 
     .cart-widget {
       border-radius: 0 0 1.7rem 1.7rem;
+
       //overflow: hidden;
       .cart-widget-products {
         .cart-widget-product {
           &-image {
+
             a,
             img {
               width: 100%;
@@ -289,7 +332,7 @@ body {
               font-weight: 500;
               color: $col-text;
               border: 1px solid $col-primary-dark;
-              border-radius: 1rem 0.5rem .5rem 1rem;              
+              border-radius: 1rem 0.5rem .5rem 1rem;
             }
           }
 
@@ -299,6 +342,7 @@ body {
               font-weight: 700;
               color: $col-primary;
             }
+
             [data-testid="cartWidgetProductPrice"] {
               @include expressive-font;
               font-size: .9rem;
@@ -319,7 +363,7 @@ body {
           }
         }
       }
- 
+
       .cart-widget-button {
         padding: 1rem 0 0;
         border-radius: 0 0 1.7rem 1.7rem;

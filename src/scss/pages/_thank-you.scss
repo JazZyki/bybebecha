@@ -1,0 +1,94 @@
+@use '../abstract/' as *;
+
+.in-dekujeme {
+    &,
+    .content-inner {
+        background-color: $col-background !important;
+    }
+
+    .order-summary-heading {
+        color: $col-secondary;
+    }
+
+    .reca-number {
+        strong {
+            @include expressive-font;
+            font-size: 1.2rem;
+            color: $col-secondary;
+            font-weight: 900;
+        }
+    }
+
+    .co-box {
+        h4 {
+            @include expressive-font;
+            text-align: center;
+            font-size: 1.2rem;
+            color: $col-secondary;
+
+            &::before {
+                content: none;
+            }
+        }
+
+        .recapitulation-table {
+            tr {
+                th,
+                td {
+                    width: 50%;
+                }
+
+                th {
+                    text-align: right;
+                    padding-right: 1rem;
+                }
+
+                td {
+                    @include expressive-font;
+                    font-size: 1rem;
+                    color: $col-primary;
+                }
+            }
+        }
+
+        .cart-table {
+            tr {
+                td {
+                    background-color: $col-background;
+
+                    &.cart-p-image {
+                        img {
+                            bled-mode: multiply;
+                        }
+                    }
+
+                    &.p-name {
+                        span {
+                            font-size: 1rem;
+                            color: $col-primary;
+                            font-weight: 700;
+                        }
+                    }
+
+                    &.p-quantity,
+                    &.p-price {
+                        @include expressive-font;
+                        color: $col-secondary;
+                    }
+
+                    &.p-price {
+                        border-right: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .recapitulation-wrapper {
+        .summary-thx {
+            @include expressive-font;
+            font-size: 1.5rem;
+            color: $col-secondary;
+        }
+    }
+}

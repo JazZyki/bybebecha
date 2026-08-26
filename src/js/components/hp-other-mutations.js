@@ -7,11 +7,14 @@ if (selectedProductsSectionTitle) {
             <p>Speciálně sestavené balíčky v dárkovém balení pro nejdůležitější fáze mateřství a vývoje dítěte.</p> 
         </div>
         <div class="products-section-link">
-            <a href="/collections/sady-pro-klidny-start" class="btn btn-secondary has-arrow">Všechny balíčky</a>
+            <a href="/darkove-balicky-2/" class="btn btn-secondary has-arrow">Všechny balíčky</a>
         </div>
     `;
 
     selectedProductsSectionTitle.innerHTML = selectedProductSectionHTML;
+
+    const selectedProductsSection = selectedProductsSectionTitle.closest('.content-wrapper ');
+    selectedProductsSection.classList.add('selected-products-section');
 }
 
 const eshopHeader = document.querySelector('.welcome-wrapper .h1');

@@ -21,7 +21,6 @@ $themes: (
 
     .basic-description,
     .p-short-description {
-
         ul li,
         p {
             font-size: 1.1rem;
@@ -251,6 +250,68 @@ $themes: (
                 height: 6px;
                 background-size: contain;
                 background-repeat: no-repeat;
+            }
+        }
+
+        .detail-parameters {
+            width: 100%;
+
+            .variant-list {
+                display: flex;
+                flex-direction: column;
+
+                th {
+                    font-size: 1rem;
+                    color: $col-secondary;
+                }
+
+                td {
+                    .advanced-parameter,
+                    .advanced-parameter-inner {
+                        width: 80px;
+                        height: 80px;
+                    }
+
+                    .yes-before {
+                        border-color: $col-primary;
+                        border-width: 3px;
+
+                        &::before {
+                            background-size: 50% !important;
+                        }
+                    }
+                }
+            }
+        }
+
+        .gift-tip {
+            display: inline-block;
+            width: 100%;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            position: relative;
+            background-color: $col-secondary;
+            color: $col-background !important;
+            border-radius: 1rem;
+            font-size: 1.2rem;
+
+            &::before {
+                content: '';
+                display: block;
+                width: 5rem;
+                height: 8rem;
+                position: relative;
+                float: right;
+                margin-right: 0;
+                margin-top: -3.5rem;
+                margin-left: 1rem;
+                background-image: url('/user/documents/upload/product-info/bebesak-pozor-web.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            b {
+                color: $col-background !important;
             }
         }
 

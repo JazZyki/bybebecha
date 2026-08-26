@@ -35,3 +35,17 @@ if (footerBannerBachovky && topMenuLevel2) {
     menuElement.appendChild(footerBannerBachovky);
     topMenuLevel2.appendChild(menuElement);
 }
+
+const linkToKonzultace = document.querySelector('#navigation .menu-level-3 a[href="/konzultace/"]');
+if (linkToKonzultace) {
+    linkToKonzultace.setAttribute('href', '/aromaterapeuticke-konzultace/');
+}
+
+const linkToImunita = document.querySelector('#navigation .menu-level-2 a[href="/imunita/"]');
+if (linkToImunita) {
+    const linkToImunitaParent = linkToImunita.closest('li');
+    console.log('linkToImunitaParent:', linkToImunitaParent);
+    if (linkToImunitaParent) {
+        linkToImunitaParent.classList.add('menu-item--hidden');
+    }
+}

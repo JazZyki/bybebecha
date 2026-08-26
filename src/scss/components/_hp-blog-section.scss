@@ -3,17 +3,25 @@
 .homepage-blog-wrapper {
     padding: 0 0 4rem; 
     .homepage-group-title.h4 {
-        max-width: unset;
+        max-width: 100%;
         margin-bottom: 2.5rem;
         position: relative;
         font-size: 2.5rem;
         color: $col-primary-dark;
         @include expressive-font;
+        @include respond-to(md) {
+            max-width: unset;
+        }
 
         div {
             margin: auto;
             position: relative;
             width: max-content;
+            max-width: 100%;
+            text-align: left;
+            @include respond-to(md) {
+                text-align: center;
+            }
 
             &::after {
                 content: '';

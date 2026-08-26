@@ -1,0 +1,38 @@
+@use "../abstract" as *;
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+
+    legend {
+        @include expressive-font;
+        font-size: 1.2rem;
+        color: $col-primary;
+        margin-bottom: 1rem;
+    }
+
+}
+.form-group {
+    label, 
+    .label {
+        @include expressive-font;
+        font-size: 1rem;
+        color: $col-text;
+    }
+
+    input,
+    textarea {
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid $col-secondary;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border-radius: 1rem;
+    }
+
+    textarea {
+        min-height: 100px;
+        border: 2px solid $col-secondary;
+    }
+}

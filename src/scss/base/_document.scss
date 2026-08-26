@@ -39,7 +39,15 @@ html {
 			}
 		}
 
-		.basic-description, .extended-description, .pageArticleDetail {			
+		/*a {
+			color: $col-primary;
+			text-decoration: underline;
+			&:hover {
+				color: $col-secondary;
+			}
+		}*/
+
+		.basic-description, .extended-description, .pageArticleDetail, .category__secondDescription {			
 			font-size: 1.2rem !important;
 			ul {
 				list-style: none;

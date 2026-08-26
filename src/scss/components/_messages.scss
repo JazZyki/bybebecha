@@ -1,0 +1,40 @@
+@use "../abstract" as *;
+
+.messages {
+    max-width: 50vw;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    .msg {
+        @include expressive-font;
+        font-size: 1.25rem;
+        border-radius: 1rem;
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 200vw;
+            height: 200vh;
+            position: absolute;
+            top: -50vh;
+            left: -50vw;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            text-align: center;
+        }
+
+        &.msg-error {
+            background-color: $col-secondary-darker;
+            border-color: $col-secondary-darker;
+        }
+
+        &.msg-success {
+            background-color: $col-primary;
+            border-color: $col-primary;
+        }
+    }
+}

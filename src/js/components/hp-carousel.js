@@ -42,6 +42,16 @@ function initHpSplide() {
     const linkTextEl = item.querySelector('.extended-banner-link');
     const linkText = linkTextEl ? linkTextEl.textContent.trim() : 'Prozkoumat';
 
+    const link1El = item.querySelector('.banner-link-1');
+    const link1Href = link1El ? link1El.getAttribute('href') : '#';
+    const link1Text = link1El ? link1El.textContent.trim() : '';
+    const link1Classes = link1El ? link1El.getAttribute('class') : '';
+
+    const link2El = item.querySelector('.banner-link-2');
+    const link2Href = link2El ? link2El.getAttribute('href') : '#';
+    const link2Text = link2El ? link2El.textContent.trim() : '';
+    const link2Classes = link2El ? link2El.getAttribute('class') : '';
+
     slidesData.push({
       href,
       imgSrc,
@@ -49,6 +59,12 @@ function initHpSplide() {
       titleHtml,
       descHtml,
       linkText,
+      link1Href,
+      link1Text,
+      link2Classes,
+      link2Href,
+      link2Text,
+      link1Classes,
     });
   });
 
@@ -75,7 +91,8 @@ function initHpSplide() {
             <h2 class="extended-banner-title hp-carousel-title">${slide.titleHtml}</h2>
             <p class="extended-banner-text hp-carousel-text">${slide.descHtml}</p>
             <div class="hp-carousel-action">
-              <a href="${slide.href}" class="extended-banner-link carousel-slide-link btn btn-carousel-hp hp-carousel-btn">${slide.linkText}</a>
+              <a href="${slide.link1Href}" class="${slide.link1Classes}">${slide.link1Text}</a>
+              <a href="${slide.link2Href}" class="${slide.link2Classes}">${slide.link2Text}</a>
             </div>
           </div>
         </div>
