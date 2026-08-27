@@ -4,15 +4,26 @@ footer#footer {
     .container {
         width: 90vw;
         background-color: $col-primary;
-        box-shadow: 5vw 1px 0 $col-primary, -5vw 1px 0 $col-primary;
+        box-shadow: 5vw -1px 0 $col-primary, -5vw -1px 0 $col-primary;
+        @include respond-to(md){
+            box-shadow: 5vw 1px 0 $col-primary, -5vw 1px 0 $col-primary;
+        }
 
         &.footer-bottom {
             background-color: $col-primary-dark;
-            box-shadow: 5vw 1px 0 $col-primary-dark, -5vw 1px 0 $col-primary-dark;
+            box-shadow: 5vw -1px 0 $col-primary-dark, -5vw -1px 0 $col-primary-dark;
+            @include respond-to(md){
+                box-shadow: 5vw 1px 0 $col-primary-dark, -5vw 1px 0 $col-primary-dark;
+            }
         }
 
         .site-name {
+            display: block;
             max-width: 160px;
+            margin-top: 1rem;
+            @include respond-to(md){
+                top: 26px;
+            }
             img {
                 width: 100%;
             }
@@ -49,6 +60,11 @@ footer#footer {
 
         .custom-footer {
             padding-top: 2rem;
+
+            .banner {
+                min-height: 100px;
+                margin-bottom: 0;
+            }
             
             h3 {
                 margin: 0 0 1rem;

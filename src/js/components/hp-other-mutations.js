@@ -3,7 +3,7 @@ const selectedProductsSectionTitle = document.querySelector('.homepage-products-
 if (selectedProductsSectionTitle) {
     const selectedProductSectionHTML = `
         <div class="product-section-title">
-            <h2 class="products-section-heading-2">Sady pro klidný start</h2>
+            <h2 class="products-section-heading-2">Sady pro <strong>klidný start</strong></h2>
             <p>Speciálně sestavené balíčky v dárkovém balení pro nejdůležitější fáze mateřství a vývoje dítěte.</p> 
         </div>
         <div class="products-section-link">
@@ -26,7 +26,7 @@ if (eshopHeader) {
 const isBlogWrapper = document.querySelector('.homepage-blog-wrapper');
 if (isBlogWrapper) {
     const blogSectionTitle = isBlogWrapper.querySelector('.homepage-group-title.h4');
-    blogSectionTitle.innerHTML = '<div>Nejnovější články <strong>z blogu</strong></div>';
+    blogSectionTitle.innerHTML = '<div>Nejnovější články <strong>z&nbsp;blogu</strong></div>';
 
     const blogSectionLink = document.createElement('div');
     blogSectionLink.classList.add('products-section-link');

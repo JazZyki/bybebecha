@@ -1,31 +1,5 @@
 @use "../abstract" as *;
 
-/*.navigation-buttons {
-    a {
-        color: black;
-    }
-}*/
-
-/*.header-navigation {
-    >div {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        gap: 5%;
-
-        .site-name {
-            z-index: 1001;
-            order: 1;
-        }
-
-        .navigation-buttons {
-            order: 3;
-            display: flex;
-        }
-    }
-}
-*/
-
 nav#navigation {
     padding-top: 4rem;
     @include respond-to(md) {
@@ -34,6 +8,10 @@ nav#navigation {
     @include expressive-font;
 
     @include respond-to(lg) {
+        width: 100%;
+    }
+
+    @include respond-to(xl) {
         width: 70%;
     }
 

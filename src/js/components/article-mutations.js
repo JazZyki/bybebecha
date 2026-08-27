@@ -78,6 +78,7 @@ async function renderArticleProductsWidget(articleContent) {
       href.includes('/objednavka') ||
       href.includes('/login') ||
       href.includes('/obchodni-podminky') ||
+      href.includes('/imunita') ||
       href.match(/\.(jpg|jpeg|png|gif|webp|svg|pdf|zip)$/i)
     ) {
       return;

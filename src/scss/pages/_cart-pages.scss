@@ -11,7 +11,8 @@
     background-color: $col-background !important;
 
     .cart-wrapper,
-    .cart-inner  {
+    .cart-inner {
+        margin: 2rem auto;
         .cart-content {
             margin-top: 2rem;
             margin-bottom: 2rem;
@@ -120,8 +121,12 @@
 
         }
         .next-step {
-            justify-content: space-between;
-
+            align-items: center;
+            gap: 1rem;
+            @include respond-to(md) {
+                justify-content: space-between;
+            }
+            
             a,
             button {
                 font-size: 1rem;
@@ -252,27 +257,36 @@
                 margin: 0 auto;
             }
             fieldset {
-                padding: 2rem 3rem;
+                padding:1rem;
                 width: 100%;
                 position: relative;
                 @include respond-to(md) {
                     width: 50%;
+                    padding: 2rem 3rem;
                 }
             }
             
             .co-billing-address {
-                padding: 2rem 3rem;
+                width: 100%;
                 padding: 0;
+                @include respond-to(md) {
+                    width: 50%;
+                }
                 fieldset {
+                    padding: 1rem;
                     width: 100%;
+                    @include respond-to(md) {
+                        padding: 2rem 3rem;
+                    }
                 }
             }
 
             .co-box-additional {
-                padding: 2rem 3rem;
+                padding: 1rem;
                 width: 100%;
                 fieldset {
                     width: 100%;
+                    padding: 2rem 3rem;
                 }
 
                 .stay-in-touch {
@@ -296,6 +310,10 @@
         .form-legend {
             position: absolute;
             top: 10px;
+            right: 10px;
+            @include respond-to(md) {
+                right: unset;
+            }
         }
     }
 }

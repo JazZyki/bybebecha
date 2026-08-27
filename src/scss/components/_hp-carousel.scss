@@ -357,6 +357,17 @@
       transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
   }
 
+  .hp-carousel-action {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    @include respond-to(lg) {
+      justify-content: flex-start;
+    }
+  }
+
   &.is-active {
     .hp-carousel-title {
       opacity: 1;

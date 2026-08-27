@@ -34,6 +34,28 @@ $category-themes: (
         }
     }
 
+    .category-perex {
+        h2 {
+            font-size: 1.5rem;
+            color: $col-secondary;
+            margin-bottom: 1rem;
+
+            strong {
+                color: $col-secondary-darker;
+            }
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: $col-text;
+            line-height: 1.5;
+
+            strong {
+                color: $col-primary;
+            }
+        }
+    }
+
     .products-top-header {
         color: #C3635C;
     }

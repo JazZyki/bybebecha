@@ -1,0 +1,80 @@
+@use "../abstract" as *;
+
+.customer-page {
+    .content-wrapper {
+        aside.sidebar {
+            background-color: transparent;
+
+            .sidebar-inner {
+                padding: 1rem 2rem 0 0;
+
+                ul {
+                    list-style: none;
+                    padding-left: 2rem;
+
+                    li {
+                        position: relative;
+                        margin-bottom: 1rem;
+                        font-size: 1.1rem !important;
+
+                        &:before {
+                            content: "";
+                            color: $col-primary;
+                            display: inline-block;
+                            width: 1.5rem;
+                            height: 1.5rem;
+                            position: absolute;
+                            top: 0;
+                            left: -2rem;
+                            background-image: url('/user/documents/upload/product-info/list-marker.svg');
+                        }
+
+                        strong,
+                        b {
+                            color: $col-primary;
+                        }
+
+                        &.active,
+                        &.logout {
+                            &::before {
+                                content: none;
+                            }
+                        }
+
+                        &.logout {
+                            a.btn {
+                                font-size: 1rem;
+                                padding: 0.5rem 1rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .content.narrow {
+        @include respond-to('md') {
+            position: relative;
+            padding: 0 2rem;
+            border-left: 1px solid rgba(79, 90, 57, 0.25);
+
+            &::before {
+                content: '';
+                display: block;
+                width: 1rem;
+                height: 100%;
+                position: absolute;
+                left: -1rem;
+                top: 0;
+                background: #ffffff;
+                background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.15) 100%);
+            }
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: $col-primary;
+        }
+    }
+}

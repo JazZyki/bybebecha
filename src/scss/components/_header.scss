@@ -58,6 +58,13 @@ header {
         flex: unset;
       }
 
+      .search {
+        max-width: 250px;
+        @include respond-to(xl) {
+          max-width: 400px;
+        }
+      }
+
       .site-name {
         z-index: 1001;
         top: 0;
@@ -178,6 +185,19 @@ header {
             display: none;
           }
         }
+
+        .top-nav-button-account {
+          display: block;
+          width: 2rem;
+          height: 2rem;
+          background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%234F5A39" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>');
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+          span {
+            display: none;
+          }
+        }
       }
     }
 
@@ -198,7 +218,8 @@ header {
       top: 10px;
 
       .container {
-        max-width: 50vw;
+        max-width: 70vw;
+        min-width: 904px;
         padding: 0 3rem;
         border: 3px solid $col-primary;
         border-radius: 5rem;

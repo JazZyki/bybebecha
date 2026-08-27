@@ -1,10 +1,13 @@
 @use "../abstract" as *;
 
 .messages {
-    max-width: 50vw;
+    width: 80%;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    @include respond-to(md) {
+        max-width: 50vw;
+    }
 
     .msg {
         @include expressive-font;
@@ -35,6 +38,32 @@
         &.msg-success {
             background-color: $col-primary;
             border-color: $col-primary;
+        }
+    }
+}
+
+.site-msg {
+    &.information {
+        width: 100vw;
+        max-width: 100%;
+        padding: 0.5rem 1rem;
+        left: 0;
+        bottom: 0;
+        font-size: 1.1rem;
+        background-color: $col-secondary-darker;
+        color: #ffffff;
+
+        a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+    }
+
+    .close {
+        right: 1rem;
+        font-size: 1rem;
+        &::before {
+            color: #ffffff;
         }
     }
 }

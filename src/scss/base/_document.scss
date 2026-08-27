@@ -11,6 +11,13 @@ html {
 		@include basic-font;
 		color: $col-text;
 		background-color: $col-background;
+
+		* {
+			&:focus {
+				outline: 2px solid $col-secondary;
+				border: none;
+			}
+		}
 		
 		.header-navigation>div, 
 		.benefitBanner,
