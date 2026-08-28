@@ -103,9 +103,14 @@
                 }
 
                 .flags-default {
-                    left: 24px;
+                    left: 23px;
                     position: absolute;
                     top: 24px;
+
+                    .flag {
+                        max-width: 10rem;
+                        border-radius: 0 0.5rem 0.5rem 0;
+                    }
                 }
 
                 a.image {

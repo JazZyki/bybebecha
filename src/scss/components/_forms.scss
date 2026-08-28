@@ -11,28 +11,912 @@ fieldset {
         color: $col-primary;
         margin-bottom: 1rem;
     }
-
 }
+
+/* ==========================================================================
+   Globální styly pro formulářové prvky napříč celým e-shopem
+   ========================================================================== */
+
+/* Globální styly pro checkboxy */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 1.35rem;
+    height: 1.35rem;
+    min-width: 1.35rem;
+    min-height: 1.35rem;
+    border: 2px solid #b8aea3;
+    border-radius: 0.35rem;
+    background-color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin: 0;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+
+    &::after {
+        content: '';
+        display: none;
+        width: 0.35rem;
+        height: 0.65rem;
+        border: solid #ffffff;
+        border-width: 0 2.5px 2.5px 0;
+        transform: rotate(45deg) translate(-1px, -1px);
+    }
+
+    &:hover {
+        border-color: $col-secondary;
+        background-color: #fff6f5;
+    }
+
+    &:checked {
+        background-color: $col-secondary;
+        border-color: $col-secondary;
+
+        &::after {
+            display: block;
+        }
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba($col-secondary, 0.25);
+    }
+
+    &:disabled {
+        background-color: #f1ede8;
+        border-color: #d1c8be;
+        cursor: not-allowed;
+    }
+}
+
+/* Globální styly pro radio buttony */
+input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 1.35rem;
+    height: 1.35rem;
+    min-width: 1.35rem;
+    min-height: 1.35rem;
+    border: 2px solid #b8aea3;
+    border-radius: 50%;
+    background-color: #ffffff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    margin: 0;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+
+    &::after {
+        content: '';
+        display: none;
+        width: 0.55rem;
+        height: 0.55rem;
+        border-radius: 50%;
+        background-color: #ffffff;
+    }
+
+    &:hover {
+        border-color: $col-secondary;
+        background-color: #fff6f5;
+    }
+
+    &:checked {
+        background-color: $col-secondary;
+        border-color: $col-secondary;
+
+        &::after {
+            display: block;
+        }
+    }
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba($col-secondary, 0.25);
+    }
+
+    &:disabled {
+        background-color: #f1ede8;
+        border-color: #d1c8be;
+        cursor: not-allowed;
+    }
+}
+
+/* Standardní .form-group kontejnery */
 .form-group {
+    margin-bottom: 1.25rem;
+
     label, 
     .label {
         @include expressive-font;
         font-size: 1rem;
         color: $col-text;
+        display: block;
+        margin-bottom: 0.4rem;
     }
 
-    input,
+    /* Když .form-group obsahuje přímo checkbox nebo radio */
+    &:has(> input[type="checkbox"]),
+    &:has(> input[type="radio"]),
+    &.form-group--checkbox,
+    &.form-group--radio {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin-bottom: 1rem;
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            margin: 0;
+        }
+
+        label,
+        .label,
+        label.whole-width {
+            display: inline-block;
+            margin-bottom: 0;
+            width: auto;
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+
+    /* Fallback / přímý sourozenec pro label následující po checkboxu / radiu */
+    input[type="checkbox"] + label,
+    input[type="radio"] + label {
+        display: inline-block;
+        margin-bottom: 0;
+        margin-left: 0.65rem;
+        cursor: pointer;
+        vertical-align: middle;
+        user-select: none;
+
+        &.whole-width {
+            width: auto;
+        }
+    }
+
+    input:not([type="checkbox"]):not([type="radio"]),
+    select,
     textarea {
-        background-color: transparent;
-        border: none;
-        border-bottom: 2px solid $col-secondary;
-        padding: 0.5rem 1rem;
+        width: 100%;
+        background-color: #fff;
+        border: 1.5px solid #d9d2c9;
+        padding: 0.75rem 1rem;
         font-size: 1rem;
-        border-radius: 1rem;
+        border-radius: 0.75rem;
+        color: $col-text;
+        font-family: inherit;
+        box-sizing: border-box;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+        &:focus {
+            outline: none;
+            border-color: $col-secondary;
+            box-shadow: 0 0 0 3px rgba($col-secondary, 0.15);
+        }
+
+        &::placeholder {
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+    }
+
+    select {
+        appearance: none;
+        background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%234F5A39" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1.2rem;
+        padding-right: 2.5rem;
+        cursor: pointer;
     }
 
     textarea {
-        min-height: 100px;
-        border: 2px solid $col-secondary;
+        min-height: 110px;
+        resize: vertical;
+    }
+}
+
+/* Podpora pro doplňkové boxy a košík */
+.co-box,
+.co-box-additional {
+    .form-group {
+        &:has(> input[type="checkbox"]),
+        &:has(> input[type="radio"]) {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+        input[type="checkbox"] + label,
+        input[type="radio"] + label {
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+    }
+}
+
+/* ==========================================================================
+   Aromatherapy & Bach Flower Remedies Consultation Pages
+   ========================================================================== */
+.aroma-consultation-page {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+    color: $col-text;
+
+    .aroma-consultation-header {
+        text-align: center;
+        margin-bottom: 2.5rem;
+
+        .aroma-badge {
+            display: inline-block;
+            background-color: $col-primary-light;
+            color: $col-primary-dark;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.35rem 1.1rem;
+            border-radius: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .aroma-title {
+            @include expressive-font;
+            color: $col-primary;
+            font-size: 2.1rem;
+            line-height: 1.25;
+            margin: 0.5rem 0 1.25rem;
+
+            @include respond-to('md') {
+                font-size: 2.5rem;
+            }
+        }
+
+        .aroma-intro {
+            font-size: 1.2rem !important;
+            line-height: 1.6;
+            color: $col-primary-dark !important;
+            max-width: 720px;
+            margin: 0 auto 0.75rem;
+            font-weight: 500;
+        }
+
+        .aroma-subintro {
+            font-size: 1.05rem !important;
+            line-height: 1.5;
+            color: $col-text !important;
+            max-width: 660px;
+            margin: 0 auto;
+        }
+    }
+
+    /* Benefits Grid (Proč zvolit Bachovy esence) */
+    .aroma-benefits-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        margin-bottom: 2.5rem;
+
+        @include respond-to('md') {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .benefit-card {
+            background-color: #ffffff;
+            border: 1px solid #eadfd9;
+            border-radius: 1.15rem;
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(79, 90, 57, 0.04);
+            transition: all 0.3s ease;
+
+            &:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 24px rgba(79, 90, 57, 0.09);
+                border-color: $col-secondary-light;
+            }
+
+            .benefit-icon {
+                width: 3rem;
+                height: 3rem;
+                border-radius: 50%;
+                background-color: $col-primary-light;
+                color: $col-primary;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 1rem;
+
+                svg {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                }
+            }
+
+            h3 {
+                @include expressive-font;
+                font-size: 1.15rem;
+                color: $col-primary;
+                margin: 0 0 0.5rem;
+            }
+
+            p {
+                font-size: 0.95rem !important;
+                line-height: 1.5;
+                color: $col-text !important;
+                margin: 0;
+            }
+        }
+    }
+
+    /* Text & Story Blocks */
+    .aroma-content-card {
+        background: #ffffff;
+        border: 1px solid #eadfd9;
+        border-radius: 1.25rem;
+        padding: 1.75rem 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 20px rgba(79, 90, 57, 0.04);
+
+        @include respond-to('md') {
+            padding: 2.25rem 2.5rem;
+        }
+
+        h2 {
+            @include expressive-font;
+            color: $col-primary;
+            font-size: 1.6rem;
+            margin: 0 0 0.5rem;
+        }
+
+        .card-subtitle {
+            @include expressive-font;
+            font-size: 1.1rem;
+            color: $col-secondary;
+            display: block;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        p {
+            font-size: 1.05rem !important;
+            line-height: 1.65;
+            color: $col-text !important;
+            margin-bottom: 1.2rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            strong, b {
+                color: $col-primary-dark;
+            }
+        }
+    }
+
+    /* Highlight Banner / Quote */
+    .aroma-quote-banner {
+        background: linear-gradient(135deg, #fff7f6 0%, #fff0ed 100%);
+        border-left: 4px solid $col-secondary;
+        border-radius: 0 1rem 1rem 0;
+        padding: 1.25rem 1.5rem;
+        margin: 1.5rem 0;
+
+        h3 {
+            @include expressive-font;
+            color: $col-secondary-darker;
+            font-size: 1.25rem;
+            margin: 0 0 0.4rem;
+        }
+
+        p {
+            font-size: 1rem !important;
+            line-height: 1.55;
+            color: #555555 !important;
+            margin: 0;
+        }
+    }
+
+    /* Consultation Features / Process Grid */
+    .consultation-info-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 1.5rem 0;
+
+        @include respond-to('sm') {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .info-pill {
+            background-color: #faf8f5;
+            border: 1.5px solid #e7ded7;
+            border-radius: 0.9rem;
+            padding: 1rem 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+
+            .info-icon {
+                color: $col-primary;
+                flex-shrink: 0;
+                margin-top: 0.15rem;
+
+                svg {
+                    width: 1.35rem;
+                    height: 1.35rem;
+                }
+            }
+
+            .info-text {
+                strong {
+                    @include expressive-font;
+                    display: block;
+                    font-size: 1.05rem;
+                    color: $col-primary;
+                    margin-bottom: 0.2rem;
+                }
+
+                span {
+                    font-size: 0.92rem;
+                    line-height: 1.45;
+                    color: #555;
+                }
+            }
+        }
+    }
+
+    /* Contact Direct Pills */
+    .contact-direct-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid #f0e6e0;
+
+        .direct-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background-color: #f3f6ee;
+            color: $col-primary-dark !important;
+            border: 1px solid #d4dfc7;
+            padding: 0.6rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+
+            svg {
+                width: 1.1rem;
+                height: 1.1rem;
+                color: $col-primary;
+            }
+
+            &:hover {
+                background-color: $col-primary;
+                color: #ffffff !important;
+                border-color: $col-primary;
+                transform: translateY(-2px);
+
+                svg {
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+
+    /* Form Container */
+    .aroma-form {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .aroma-section {
+        background: #ffffff;
+        border: 1px solid #eadfd9;
+        border-radius: 1.25rem;
+        padding: 1.75rem 1.5rem;
+        box-shadow: 0 4px 20px rgba(79, 90, 57, 0.04);
+        transition: box-shadow 0.3s ease;
+
+        @include respond-to('md') {
+            padding: 2.25rem 2.5rem;
+        }
+
+        &:hover {
+            box-shadow: 0 6px 24px rgba(79, 90, 57, 0.08);
+        }
+
+        .aroma-section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f2eae4;
+
+            .step-num {
+                @include expressive-font;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 2.25rem;
+                height: 2.25rem;
+                background-color: $col-primary;
+                color: #ffffff;
+                border-radius: 50%;
+                font-size: 1.1rem;
+                flex-shrink: 0;
+            }
+
+            .step-title {
+                @include expressive-font;
+                font-size: 1.4rem;
+                color: $col-primary;
+                margin: 0;
+            }
+
+            .step-desc {
+                display: block;
+                font-size: 0.9rem;
+                color: $col-secondary;
+                margin-top: 0.2rem;
+                font-weight: 400;
+            }
+        }
+    }
+
+    .form-grid-2 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+
+        @include respond-to('md') {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .required {
+        color: $col-secondary;
+        font-weight: bold;
+    }
+
+    .field-hint {
+        display: block;
+        font-size: 0.88rem;
+        color: #777777;
+        margin-top: 0.35rem;
+        line-height: 1.4;
+        font-style: italic;
+    }
+
+    .form-notice {
+        font-size: 0.92rem !important;
+        line-height: 1.5;
+        color: #777777 !important;
+        text-align: center;
+        margin-top: 1rem;
+        font-style: italic;
+    }
+
+    /* Choice cards (Checkboxes & Radios) */
+    .checkbox-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+
+        @include respond-to('md') {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .radio-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+
+        @include respond-to('sm') {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    .radio-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .group-label {
+        @include expressive-font;
+        font-size: 1.05rem;
+        color: $col-text;
+        display: block;
+        margin-bottom: 0.75rem;
+    }
+
+    .form-group-block {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group-sub {
+        margin-top: 0.75rem;
+        padding-left: 0.5rem;
+        border-left: 3px solid $col-secondary-light;
+    }
+
+    .choice-card,
+    .choice-card-radio {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.85rem;
+        background-color: #faf8f5;
+        border: 1.5px solid #e7ded7;
+        border-radius: 0.85rem;
+        padding: 0.85rem 1.1rem;
+        cursor: pointer;
+        transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+        user-select: none;
+
+        input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        &:hover {
+            border-color: $col-secondary;
+            background-color: #fff6f5;
+            transform: translateY(-2px);
+        }
+
+        &:has(input:checked) {
+            border-color: $col-secondary;
+            background-color: #fff1ef;
+            box-shadow: 0 4px 12px rgba(195, 99, 92, 0.12);
+        }
+
+        .choice-custom-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.35rem;
+            height: 1.35rem;
+            border: 2px solid #b8aea3;
+            border-radius: 0.35rem;
+            background-color: #ffffff;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+            transition: all 0.2s ease;
+
+            &::after {
+                content: '';
+                display: none;
+                width: 0.45rem;
+                height: 0.75rem;
+                border: solid #ffffff;
+                border-width: 0 2.5px 2.5px 0;
+                transform: rotate(45deg) translate(-1px, -1px);
+            }
+        }
+
+        input:checked + .choice-custom-box {
+            background-color: $col-secondary;
+            border-color: $col-secondary;
+
+            &::after {
+                display: block;
+            }
+        }
+
+        .choice-custom-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.35rem;
+            height: 1.35rem;
+            border: 2px solid #b8aea3;
+            border-radius: 50%;
+            background-color: #ffffff;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+            transition: all 0.2s ease;
+
+            &::after {
+                content: '';
+                display: none;
+                width: 0.6rem;
+                height: 0.6rem;
+                border-radius: 50%;
+                background-color: #ffffff;
+            }
+        }
+
+        input:checked + .choice-custom-circle {
+            background-color: $col-secondary;
+            border-color: $col-secondary;
+
+            &::after {
+                display: block;
+            }
+        }
+
+        .choice-text {
+            font-size: 1rem;
+            line-height: 1.45;
+            color: $col-text;
+
+            strong {
+                color: $col-primary-dark;
+                display: block;
+                font-weight: 600;
+            }
+
+            small {
+                display: block;
+                font-size: 0.88rem;
+                color: #777;
+                margin-top: 0.2rem;
+            }
+        }
+    }
+
+    /* Consent & Submit */
+    .aroma-section-submit {
+        background: #fffdfa;
+        border-color: #e5dacd;
+    }
+
+    .choice-card-consent {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.85rem;
+        margin-bottom: 1.75rem;
+        cursor: pointer;
+
+        input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .choice-custom-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.35rem;
+            height: 1.35rem;
+            border: 2px solid #b8aea3;
+            border-radius: 0.35rem;
+            background-color: #ffffff;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+            transition: all 0.2s ease;
+
+            &::after {
+                content: '';
+                display: none;
+                width: 0.45rem;
+                height: 0.75rem;
+                border: solid #ffffff;
+                border-width: 0 2.5px 2.5px 0;
+                transform: rotate(45deg) translate(-1px, -1px);
+            }
+        }
+
+        input:checked + .choice-custom-box {
+            background-color: $col-primary;
+            border-color: $col-primary;
+
+            &::after {
+                display: block;
+            }
+        }
+
+        .choice-text {
+            font-size: 1rem;
+            line-height: 1.45;
+            color: $col-text;
+        }
+    }
+
+    .submit-action-wrapper {
+        text-align: center;
+        margin-bottom: 1.5rem;
+
+        .aroma-submit-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            max-width: 380px;
+            padding: 1.1rem 2.5rem;
+            font-size: 1.25rem !important;
+            font-weight: 600;
+            color: #ffffff !important;
+            background-color: $col-primary;
+            border: 2px solid $col-primary;
+            border-radius: 2.5rem;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(79, 90, 57, 0.25);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+
+            &::after {
+                content: '';
+                display: inline-block;
+                width: 1.1rem;
+                height: 1.1rem;
+                margin-left: 0.5rem;
+                background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xml:space="preserve"><path style="fill:%23ffffff" d="M361.891 242.03 187.347 9.31c-7.714-10.283-22.298-12.365-32.582-4.655-10.283 7.713-12.367 22.3-4.655 32.582l164.072 218.758-164.071 218.767c-7.713 10.282-5.627 24.871 4.655 32.582A23.17 23.17 0 0 0 168.711 512c7.076 0 14.064-3.215 18.637-9.311l174.544-232.732a23.274 23.274 0 0 0-.001-27.927"/></svg>');
+                background-size: contain;
+                background-repeat: no-repeat;
+                transition: transform 0.3s ease;
+            }
+
+            &:hover {
+                background-color: $col-primary-dark !important;
+                border-color: $col-primary-dark;
+                transform: translateY(-3px);
+                box-shadow: 0 10px 28px rgba(79, 90, 57, 0.35);
+
+                &::after {
+                    transform: translateX(5px);
+                }
+            }
+
+            &:active {
+                transform: translateY(-1px);
+            }
+        }
+    }
+
+    .aroma-promise-box {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background-color: #f3f6ee;
+        border: 1px solid #d4dfc7;
+        border-radius: 1rem;
+        padding: 1rem 1.25rem;
+        color: $col-primary-dark;
+        font-size: 0.95rem;
+        line-height: 1.45;
+
+        .promise-icon {
+            color: $col-primary;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .promise-content {
+            strong {
+                color: $col-primary-dark;
+            }
+        }
     }
 }
