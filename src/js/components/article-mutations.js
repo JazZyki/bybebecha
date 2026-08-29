@@ -1,7 +1,7 @@
 let isArticleInitialized = false;
 
-async function fetchProductData(url) {
-  const cacheKey = `bebecha_product_cache_${url}`;
+async function fetchProductData(url, fallbackTitle = '') {
+  const cacheKey = `bebecha_product_cache_v2_${url}`;
   const cached = sessionStorage.getItem(cacheKey);
   if (cached) {
     try {
@@ -10,27 +10,48 @@ async function fetchProductData(url) {
   }
 
   try {
-    const res = await fetch(url);
-    if (!res.ok) return null;
+    const fetchUrl = url.startsWith('http') ? url : new URL(url, window.location.origin).href;
+    const res = await fetch(fetchUrl);
+    if (!res.ok) {
+      console.warn('[ArticleProducts] HTTP chyba při načítání:', fetchUrl, res.status);
+      return null;
+    }
     const htmlText = await res.text();
     const doc = new DOMParser().parseFromString(htmlText, 'text/html');
 
     // Název produktu
-    const title =
+    let title =
       doc.querySelector('h1[itemprop="name"]')?.textContent?.trim() ||
+      doc.querySelector('.p-detail-inner-header h1')?.textContent?.trim() ||
       doc.querySelector('.p-detail-inner h1')?.textContent?.trim() ||
+      doc.querySelector('.p-info-wrapper h1')?.textContent?.trim() ||
       doc.querySelector('.product-top h1')?.textContent?.trim() ||
-      doc.querySelector('h1')?.textContent?.trim() ||
+      doc.querySelector('.p-detail h1')?.textContent?.trim() ||
+      doc.querySelector('h1[data-testid="productTitle"]')?.textContent?.trim() ||
       doc.querySelector('meta[property="og:title"]')?.getAttribute('content') ||
+      fallbackTitle ||
       '';
 
+    if (title && title.includes('|')) {
+      title = title.split('|')[0].trim();
+    }
+
     // Hlavní obrázek produktu
-    let image =
-      doc.querySelector('.p-main-image img')?.getAttribute('src') ||
-      doc.querySelector('.p-main-image img')?.getAttribute('data-src') ||
-      doc.querySelector('.p-main-image img')?.getAttribute('data-original') ||
-      doc.querySelector('meta[property="og:image"]')?.getAttribute('content') ||
-      '';
+    let image = doc.querySelector('meta[property="og:image"]')?.getAttribute('content') || '';
+
+    if (!image) {
+      const mainImg = doc.querySelector('.p-main-image img, .p-image img, [itemprop="image"]');
+      const dataSrc = mainImg?.getAttribute('data-src') || mainImg?.getAttribute('data-original');
+      const src = mainImg?.getAttribute('src');
+      image = dataSrc || (src && !src.startsWith('data:image') && !src.includes('blank.gif') ? src : '') || '';
+    }
+
+    if (!image) {
+      image =
+        doc.querySelector('a.p-main-image')?.getAttribute('href') ||
+        doc.querySelector('.p-image a')?.getAttribute('href') ||
+        '';
+    }
 
     if (image && !image.startsWith('http') && !image.startsWith('//')) {
       image = new URL(image, window.location.origin).href;
@@ -38,19 +59,26 @@ async function fetchProductData(url) {
 
     // Cena produktu
     const price =
+      doc.querySelector('.p-final-price-wrapper .price-final')?.textContent?.trim() ||
+      doc.querySelector('.price-final')?.textContent?.trim() ||
       doc.querySelector('.price-final-holder')?.textContent?.trim() ||
       doc.querySelector('.price-standard')?.textContent?.trim() ||
       doc.querySelector('.price-save')?.textContent?.trim() ||
+      doc.querySelector('.price-wrapper .price')?.textContent?.trim() ||
+      doc.querySelector('[data-testid="productPrice"]')?.textContent?.trim() ||
       doc.querySelector('[itemprop="price"]')?.textContent?.trim() ||
       '';
 
-    if (!title && !image) return null;
+    if (!title && !image) {
+      console.warn('[ArticleProducts] Nenalezen název ani obrázek pro URL:', url);
+      return null;
+    }
 
     const data = { title, image, price, url };
     sessionStorage.setItem(cacheKey, JSON.stringify(data));
     return data;
   } catch (err) {
-    console.error('Chyba při načítání produktu z článku:', url, err);
+    console.error('[ArticleProducts] Chyba při načítání produktu:', url, err);
     return null;
   }
 }
@@ -59,47 +87,73 @@ async function renderArticleProductsWidget(articleContent) {
   if (document.querySelector('.article-products-widget')) return;
 
   const links = Array.from(articleContent.querySelectorAll('a[href]'));
-  const productUrls = new Set();
+  const productLinksMap = new Map();
+
+  const excludedExactPaths = new Set([
+    '', '/', '/blog', '/blog/', '/clanky', '/clanky/',
+    '/kosik', '/kosik/', '/objednavka', '/objednavka/',
+    '/login', '/login/', '/obchodni-podminky', '/obchodni-podminky/',
+    '/imunita', '/imunita/'
+  ]);
+
+  const currentHost = window.location.hostname.replace(/^www\./, '');
 
   links.forEach((a) => {
     const href = a.getAttribute('href');
     if (!href) return;
 
-    // Filtrujeme kotvy, javascript, e-maily a soubory
     if (
       href.startsWith('#') ||
       href.startsWith('mailto:') ||
       href.startsWith('tel:') ||
       href.startsWith('javascript:') ||
-      href.includes('/blog') ||
-      href.includes('/clanky') ||
       href.includes('/user/documents') ||
-      href.includes('/kosik') ||
-      href.includes('/objednavka') ||
-      href.includes('/login') ||
-      href.includes('/obchodni-podminky') ||
-      href.includes('/imunita') ||
       href.match(/\.(jpg|jpeg|png|gif|webp|svg|pdf|zip)$/i)
     ) {
       return;
     }
 
-    // Ponecháme pouze interní odkazy (relativní nebo se stejnou doménou)
     try {
       const parsedUrl = new URL(href, window.location.origin);
-      if (parsedUrl.origin === window.location.origin && parsedUrl.pathname !== window.location.pathname) {
-        productUrls.add(parsedUrl.pathname);
+      const linkHost = parsedUrl.hostname.replace(/^www\./, '');
+      const isInternal =
+        linkHost === currentHost ||
+        linkHost.includes('bybebecha') ||
+        linkHost.includes('myshoptet') ||
+        linkHost === 'localhost' ||
+        linkHost === '127.0.0.1';
+
+      if (
+        isInternal &&
+        parsedUrl.pathname !== window.location.pathname &&
+        !excludedExactPaths.has(parsedUrl.pathname) &&
+        !parsedUrl.pathname.startsWith('/blog/') &&
+        !parsedUrl.pathname.startsWith('/clanky/')
+      ) {
+        const productPath = parsedUrl.pathname;
+        if (!productLinksMap.has(productPath)) {
+          const fallbackTitle = a.getAttribute('title')?.trim() || a.textContent?.trim() || '';
+          productLinksMap.set(productPath, fallbackTitle);
+        }
       }
     } catch (e) {}
   });
 
-  if (productUrls.size === 0) return;
+  console.log('[ArticleProducts] Nalezené URL produktů v článku:', Array.from(productLinksMap.keys()));
+
+  if (productLinksMap.size === 0) return;
 
   const products = (
-    await Promise.all(Array.from(productUrls).map(fetchProductData))
+    await Promise.all(
+      Array.from(productLinksMap.entries()).map(([url, fallbackTitle]) =>
+        fetchProductData(url, fallbackTitle)
+      )
+    )
   ).filter(Boolean);
 
-  if (products.length === 0) return;
+  console.log('[ArticleProducts] Úspěšně načtené produkty:', products);
+
+  if (products.length === 0 || document.querySelector('.article-products-widget')) return;
 
   const widget = document.createElement('section');
   widget.className = 'article-products-widget';
@@ -127,22 +181,22 @@ async function renderArticleProductsWidget(articleContent) {
     </div>
   `;
 
-  const sidebar = document.querySelector('aside.sidebar .sidebar-inner');
+  const sidebar = document.querySelector('aside .sidebar-inner, #sidebar .sidebar-inner, .sidebar-inner');
   const isSidebarVisible =
     sidebar &&
     window.innerWidth > 768 &&
-    window.getComputedStyle(sidebar).display !== 'none';
+    window.getComputedStyle(sidebar).display !== 'none' &&
+    sidebar.offsetWidth > 0;
 
   if (isSidebarVisible) {
     sidebar.insertAdjacentElement('afterbegin', widget);
   } else {
-    // Mobilní zobrazení nebo chybějící sidebar: vložíme po 10. odstavci, případně na konec článku
     const paragraphs = Array.from(articleContent.querySelectorAll('p')).filter(
       (p) => !p.closest('.our-tip') && !p.closest('.article-products-widget')
     );
 
-    if (paragraphs.length >= 10) {
-      paragraphs[9].insertAdjacentElement('afterend', widget);
+    if (paragraphs.length >= 6) {
+      paragraphs[Math.min(5, paragraphs.length - 1)].insertAdjacentElement('afterend', widget);
     } else {
       articleContent.insertAdjacentElement('beforeend', widget);
     }
@@ -150,9 +204,14 @@ async function renderArticleProductsWidget(articleContent) {
 }
 
 function initArticleMutations() {
-  const articleContent = document.querySelector('.text');
+  if (isArticleInitialized) return;
+
+  const articleContent = document.querySelector(
+    '.type-posts-detail .news-item-detail .text, .news-item-detail .text, .type-posts-detail .content-inner .text, .type-posts-detail .text, .pageArticleDetail'
+  );
   
   if (articleContent) {
+    isArticleInitialized = true;
     renderArticleProductsWidget(articleContent);
   }
 
@@ -160,9 +219,21 @@ function initArticleMutations() {
   if (topPtoductsTitle) {
     topPtoductsTitle.innerHTML = '<strong>Top 10</strong> produktů';
   }
+
+  const articleHeader = document.querySelector('h1[data-testid="textArticleTitle"]');
+  if (articleHeader) {
+    const articleWrapper = document.querySelector('.text .intro-image');
+    if (articleWrapper) {
+      articleWrapper.insertAdjacentElement('afterend', articleHeader);
+    }    
+  }
 }
 
 document.addEventListener('ShoptetDOMContentLoaded', initArticleMutations);
+document.addEventListener('ShoptetPageUpdated', () => {
+  isArticleInitialized = false;
+  initArticleMutations();
+});
 
 if (document.readyState !== 'loading') {
   initArticleMutations();

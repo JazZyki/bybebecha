@@ -50,3 +50,9 @@ if (isImunitaKat && isCategoryPage) {
     imunitaParent.classList.add('menu-item--hidden');
   }
 }
+
+const isAroKonzultaceKat = document.querySelector('.subcategories li a[href="/aromaterapeuticke-konzultace-2/"]');
+const isCategoryPage2 = document.body.classList.contains('type-category') && document.body.classList.contains('in-aromaterapie');
+if (isAroKonzultaceKat && isCategoryPage2) {
+  isAroKonzultaceKat.setAttribute('href', '/aromaterapeuticke-konzultace/');
+}

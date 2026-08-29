@@ -44,8 +44,12 @@ if (linkToKonzultace) {
 const linkToImunita = document.querySelector('#navigation .menu-level-2 a[href="/imunita/"]');
 if (linkToImunita) {
     const linkToImunitaParent = linkToImunita.closest('li');
-    console.log('linkToImunitaParent:', linkToImunitaParent);
     if (linkToImunitaParent) {
         linkToImunitaParent.classList.add('menu-item--hidden');
     }
+}
+
+const linkToAroKonzultace = document.querySelector('#navigation .menu-level-2 a[href="/aromaterapeuticke-konzultace/"]');
+if (linkToAroKonzultace) {
+    linkToAroKonzultace.setAttribute('href', '/aromaterapeuticke-konzultace/');
 }
