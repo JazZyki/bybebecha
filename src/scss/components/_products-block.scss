@@ -145,6 +145,13 @@
                             margin-top: 1rem;                            
                         }
 
+                        span {
+                            display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        }
+
                         &::after {
                             content: '';
                             position: absolute;
@@ -184,6 +191,10 @@
                         @include respond-to(md) {
                             display: block;
                         }
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
                     }
                     .prices {
                         order: 2;

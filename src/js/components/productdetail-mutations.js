@@ -42,4 +42,12 @@ if (isProductDetailPage) {
       const ourTipPlaceholder = isProductDetailPage.querySelector('.extended-description')
       ourTipPlaceholder.insertAdjacentElement("afterbegin", ourTipDiv)
     }
+
+    const variablesText = document.createElement('span')
+    variablesText.classList.add('variables-text')
+    variablesText.innerHTML = '<strong>Základní</strong> - obyčejny balík s produkty zvlášť. <strong>Přírodní</strong> - dárková krabice vystlaná dřevitou vlnou a přírodním provázkem. Krabice ma průhledny hořejšek.  <strong>Luxusní</strong> -  balení je zakryté hedvábným papírem v olivové či fialové barvě a zavázané stuhou'
+    const variablesPlaceholder = isProductDetailPage.querySelector('table tr.variant-list th')
+    if (variablesPlaceholder) {
+      variablesPlaceholder.insertAdjacentElement("beforeend", variablesText)
+    }
 }
