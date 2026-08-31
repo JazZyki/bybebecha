@@ -42,14 +42,14 @@ if (document.readyState !== 'loading') {
   applyCategoryClasses();
 }
 
-const isImunitaKat = document.querySelector('.subcategories li a[href="/imunita/"]');
+/*const isImunitaKat = document.querySelector('.subcategories li a[href="/imunita/"]');
 const isCategoryPage = document.body.classList.contains('type-category');
 if (isImunitaKat && isCategoryPage) {
   const imunitaParent = isImunitaKat.closest('li');
   if (imunitaParent) {
     imunitaParent.classList.add('menu-item--hidden');
   }
-}
+}*/
 
 const isAroKonzultaceKat = document.querySelector('.subcategories li a[href="/aromaterapeuticke-konzultace-2/"]');
 const isCategoryPage2 = document.body.classList.contains('type-category') && document.body.classList.contains('in-aromaterapie');

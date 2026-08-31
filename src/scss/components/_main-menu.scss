@@ -261,14 +261,16 @@ nav#navigation {
     
                             .extended-banner-texts {
                                 .extended-banner-title {
-                                    top: 1.5rem;
+                                    width: 60%;
+                                    top: 0;
                                     color: $col-primary;
                                     font-size: 1.25rem;
                                 }
     
                                 .extended-banner-text {
-                                    top: 4rem;
-                                    bottom: unset;
+                                    width: 60%;
+                                    bottom: 0;
+                                    top: unset;
                                     color: $col-primary;
                                     text-transform: none;
                                 }

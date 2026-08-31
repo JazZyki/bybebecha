@@ -95,7 +95,7 @@
       }
 
       &:hover svg {
-        transform: translateX(-2px);
+        transform: translateX(-2px) scaleX(-1); // flip the arrow for previous
       }
     }
 
