@@ -106,6 +106,8 @@
 
             .summary-wrapper {
                 .price-wrapper {
+                    align-items: flex-end;
+                    
                     span,
                     strong {
                         @include expressive-font;
@@ -161,6 +163,30 @@
 
                     &.next-step-finish {
                         padding-bottom: 0.5rem !important;
+                    }
+                }
+            }
+
+            &.next-step--cart {
+                .summary-cart-alert-text {
+                    display: block;
+                    margin-top: 1rem;
+                    font-size: 1rem;
+                    color: $col-text;
+
+                    strong {
+                        color: $col-primary;
+                    }
+
+                    a {
+                        padding: 0.25rem 0 0 0 !important;
+                        color: $col-secondary;
+                        text-decoration: underline;
+                        transition: color 0.3s ease;
+
+                        &:hover {
+                            color: $col-primary;
+                        }
                     }
                 }
             }
