@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+/*document.addEventListener('DOMContentLoaded', function () {
     var STORAGE_KEY = 'constructionNoticeCount';
     var MAX_SHOWS = 5;
 
@@ -80,3 +80,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     document.addEventListener('keydown', onKeyDown);
 });
+*/
