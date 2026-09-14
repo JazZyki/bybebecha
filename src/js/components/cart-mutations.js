@@ -10,12 +10,24 @@ function updateSummaryAlertText() {
     }
 }
 
+function addStorageInfo() {
+    const storageInfoPlacer = document.querySelector('#cart-wrapper .cart-inner .cart-row .col-md-8');
+    const storageInfo = document.createElement('div');
+    storageInfo.classList.add('storage-info');
+    storageInfo.innerHTML = '<div class="banner-info-container"><span class="banner-main-text">Všechny objednávky odesíláme do 14 dnů.</span><span class="info-icon">i</span><span class="banner-info-text">Z kapacitních důvodů nemáme všechny nabízené produkty skladem. Věechny objednávky se snažíme zpracovat co nejdříve, nejpozdeji však do čtrnácti dnů. <strong>Děkujeme za pochopení.</strong></span></div>';
+    if (storageInfoPlacer) {
+        storageInfoPlacer.insertAdjacentElement('beforeend', storageInfo);
+    }
+}
+
 if (isFirstCartStep) {
     updateSummaryAlertText();
+    addStorageInfo();
 }
 
 document.addEventListener('ShoptetDOMCartContentLoaded', () => {
     if (isFirstCartStep) {
         updateSummaryAlertText();
+        addStorageInfo();
     }
 });
